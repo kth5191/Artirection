@@ -1,4 +1,4 @@
-package com.kdt;
+package com.artirection;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
