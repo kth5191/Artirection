@@ -11,4 +11,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/preview")
+	public String preview() {
+		return "preview";
+	}
+	
 }

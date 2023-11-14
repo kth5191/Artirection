@@ -1,0 +1,45 @@
+@import url("/css/commons/header.css");
+@import url("/css/commons/footer.css");
+@import url("/css/commons/font.css");
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'JeonjuCraftGoR';
+    color: #262A2D;
+  }
+
+.colorBlack {
+    color: #262A2D;
+}
+
+.colorWhite {
+    color: #F4F4F4 !important;
+}
+
+.colorLightGreen {
+    color: #778C86;
+}
+
+.colorDarkGreen {
+    color: #274A40;
+}
+
+.bColorBlack {
+    background-color: #262A2D;
+}
+
+.bColorWhite {
+    background-color: #F4F4F4;
+}
+
+.bColorLightGreen {
+    background-color: #778C86;
+}
+
+.bColorDarkGreen {
+    background-color: #274A40;
+}
