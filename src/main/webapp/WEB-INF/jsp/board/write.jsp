@@ -19,18 +19,18 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <link rel="stylesheet" href="/css/board/write.css">
     <title>Document</title>
-</head></head>
+</head>
 
 <body>
     <div class="boardWrite container">
         <div class="boardWrite_guide">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="/board/writeProc" method="post" enctype="multipart/form-data">
 
                 <div class="writeTitle">기록하기</div>
 
-                <input type="text" class="inputTitle" name="title" placeholder="제목을 입력하세요">
+                <input type="text" class="inputTitle" name="bTitle" placeholder="제목을 입력하세요">
 
-                <textarea id="summernote" class="content" rows="35" cols="100" placeholder="내용을 입력하세요." name="contents"></textarea>
+                <textarea id="summernote" class="content" rows="35" cols="100" placeholder="내용을 입력하세요." name="bContents"></textarea>
 
                 <div class="fileBox">
                     <input type="button" id="btnAdd" class="writebtn bColorGreen" value="+"> <span>파일 첨부하기</span>
@@ -43,9 +43,7 @@
                     </a>
                     <input class="writebtn" type="submit" value="작성하기">
                 </div>
-
             </form>
-
         </div>
     </div>
 </body>
