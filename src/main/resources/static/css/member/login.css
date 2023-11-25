@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+#container {
+    max-width: 500px;
+    min-width: 300px;
+}
+
+#loginTitle {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 40px;
+}
+
+input[type="text"] {
+    width: 100%;
+    height: 55px;
+    border-radius: 5px;
+    padding-left: 25px;
+    font-size: 20px;
+    border: 1.5px solid #919497;
+}
+
+input[type="text"]::placeholder {
+    color: #C3C5C5;
+    font-size: 15px;
+}
+
+#pw {
+    margin-top: 20px;
+}
+
+.rememberId {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+#idSaveCheck {
+    width: 19px;
+    height: 19px;
+    margin-right: 10px;
+}
+
+#login {
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 60px;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.etc {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none !important;
+    color:black !important;
+}
