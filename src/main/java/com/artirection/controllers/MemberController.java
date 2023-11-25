@@ -11,6 +11,7 @@ import com.artirection.services.EmailService;
 import com.artirection.services.MemberService;
 
 import commons.EncryptionUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -33,6 +34,32 @@ public class MemberController {
 	@RequestMapping("gologin")
 	public String goLogin() {
 		return "member/login";
+	}
+	
+	// 로그인
+	// ajax로 로그인 확인
+	@ResponseBody
+	@RequestMapping("login")
+	public boolean login(String id, String pw) {
+		
+		String pwEnc = EncryptionUtils.getSHA256(pw);
+		
+		boolean result = mservice.login(id,pwEnc);
+		
+		if(result) {
+			session.setAttribute("loginID", id);
+		}
+		
+		return result;
+	}
+	
+//	로그아웃
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request) {
+
+		session.invalidate();
+		return "redirect:/";
+
 	}
 	
 	// 회원가입 페이지 이동
@@ -118,24 +145,4 @@ public class MemberController {
 	}
 	
 	
-	
-	
-	
-////	ajax 로 로그인 됐는지 안됐는지 확인
-//	@ResponseBody
-//	@RequestMapping(value = "login", method = RequestMethod.POST)
-//	public boolean login(String id, String pw) {
-//
-////		암호화한거
-//		String pwEnc = EncryptionUtils.getSHA512(pw);
-//		boolean result = mservice.login(id, pwEnc);
-//
-//		if (result) {
-//			session.setAttribute("loginID", id);
-//			System.out.println("login( ) : " + session.getAttribute("loginID"));
-//		}
-//
-//		return result;
-//	}
-//
 }

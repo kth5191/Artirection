@@ -28,9 +28,18 @@ public class MemberService {
 	// 비밀번호 변경
 	public int updatePW(String id, String pw) {
 		Map<String, String> param = new HashMap<>();
-		param.put("id", id);
+		param.put("mID", id);
 		param.put("pw", pw);
 
 		return mdao.updatePW(param);
+	}
+	
+	// 로그인
+	public boolean login(String id, String pw) {
+		Map<String, String> param = new HashMap<>();
+		param.put("id", id);
+		param.put("pw", pw);
+		
+		return mdao.login(param);
 	}
 }

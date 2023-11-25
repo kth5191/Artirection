@@ -81,7 +81,7 @@
 				<div class="findPwBox__pwEq"></div>
 
 				<div class="findPwBox__changePwBtnBox">
-					<button type="button" class="changePwBtn">비밀번호 변경</button>
+					<button type="button" class="changePwBtn colorWhite bColorLightGreen">비밀번호 변경</button>
 				</div>
             </form>
              </div>

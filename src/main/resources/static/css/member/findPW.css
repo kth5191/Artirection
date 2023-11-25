@@ -78,6 +78,19 @@
 }
 .changePwBtn{border: none; border-radius: 5px;}
 
+input[type="text"]::placeholder {
+    color: #C3C5C5;
+    font-size: 15px;
+}
+
+input[type="password"]::placeholder {
+    color: #C3C5C5;
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+
+
 @media(max-width: 786px){
     .container{
         max-width: 786px;

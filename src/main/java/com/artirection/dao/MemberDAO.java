@@ -14,6 +14,11 @@ public class MemberDAO {
 	@Autowired
 	private SqlSession db;
 	
+	//로그인
+	public boolean login(Map<String,String> param) {
+		return db.selectOne("member.login",param);
+	}
+	
 	// 회원가입
 	public int signup(MemberDTO dto) {
 		return db.insert("member.signup", dto);
