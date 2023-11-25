@@ -1,5 +1,7 @@
 package com.artirection.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,4 +23,11 @@ public class MemberDAO {
 	public int idDup(String mID) {
 		return db.selectOne("member.idDup",mID);
 	}
+	
+	// 비밀번호 변경
+	public int updatePW(Map<String, String> param) {
+		return db.update("member.updatePW", param);
+	}
+	
+	
 }

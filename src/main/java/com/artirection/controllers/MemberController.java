@@ -2,20 +2,32 @@ package com.artirection.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.artirection.dto.MemberDTO;
+import com.artirection.services.EmailService;
 import com.artirection.services.MemberService;
 
 import commons.EncryptionUtils;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
 	
 	@Autowired
+	private HttpSession session;
+	
+	@Autowired
 	private MemberService mservice;
+	
+	@Autowired
+	private EmailService EmailService;
+	
+	// 이메일 인증 번호
+	String num = "";
 	
 	// 로그인 페이지 이동
 	@RequestMapping("gologin")
@@ -56,6 +68,57 @@ public class MemberController {
 		}
 		
 	}
+	
+	// 비밀번호 찾기 페이지 이동
+	@RequestMapping("gofindPw")
+	public String gofindPW() {
+		return "member/findPW";
+	}
+	
+	//	이메일 전송 인증
+	@ResponseBody
+	@PostMapping("email")
+	public String MailSend(String email) {
+		System.out.println(email);
+
+		System.out.println("Cont- 이메일 전송 완료");
+
+		int number = EmailService.sendMail(email);
+
+		num = "" + number;
+
+		return "이메일 성공";
+	}
+	
+//	코드 확인 인증
+	@ResponseBody
+	@PostMapping("emailChk")
+	public String emailChk(String emailCode) {
+
+		String emailSessionCode = session.getAttribute("emailCode") + "";
+
+		if (emailCode.equals(emailSessionCode)) {
+			return "true";
+		}
+		return "false";
+
+	}
+	
+//	비밀번호 변경
+	@RequestMapping("findPW")
+	public String updatePW(String id, String pw) {
+		
+		System.out.println(pw);
+		
+		//암호화한거
+		String pwEnc = EncryptionUtils.getSHA256(pw);
+		mservice.updatePW(id, pwEnc);
+
+		return "redirect:/member/gologin";
+	}
+	
+	
+	
 	
 	
 ////	ajax 로 로그인 됐는지 안됐는지 확인

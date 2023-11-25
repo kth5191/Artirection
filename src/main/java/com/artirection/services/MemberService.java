@@ -1,5 +1,8 @@
 package com.artirection.services;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +23,14 @@ public class MemberService {
 	// 회원가입시 아이디 중복 확인
 	public int idDup(String mID) {
 		return mdao.idDup(mID);
+	}
+	
+	// 비밀번호 변경
+	public int updatePW(String id, String pw) {
+		Map<String, String> param = new HashMap<>();
+		param.put("id", id);
+		param.put("pw", pw);
+
+		return mdao.updatePW(param);
 	}
 }

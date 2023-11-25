@@ -33,9 +33,9 @@
             <div class="etc">
                 <a href="/member/goSignup" id="signup">회원가입</a>
                 <div>&nbsp; | &nbsp;</div>
-                <a href="/member/findId" id="findId">아이디 찾기</a>
-                <div>&nbsp; | &nbsp;</div>
-                <a href="/member/findPw" id="findPw">비밀번호 찾기</a>
+<!--                 <a href="/member/findId" id="findId">아이디 찾기</a> -->
+<!--                 <div>&nbsp; | &nbsp;</div> -->
+                <a href="/member/gofindPw" id="findPw">비밀번호 찾기</a>
             </div>
         </form>
     </div>

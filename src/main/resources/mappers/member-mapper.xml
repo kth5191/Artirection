@@ -13,5 +13,10 @@
 	<select id="idDup" resultType="Integer">
 		select count(*) from members where mID=#{mID}
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePW">
+		update members set pw = #{pw} where mID = #{id}
+	</update>
 
 </mapper>
