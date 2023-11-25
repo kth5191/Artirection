@@ -20,7 +20,6 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </head>
-</head>
 <body>
 	<div id="container" class="container-fluid p-3">
         <div id="loginTitle">Login</div>
