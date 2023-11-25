@@ -8,5 +8,6 @@
 </head>
 <body>
 	Hello
+	<button><a href="/member/gologin">로그인</a></button>
 </body>
 </html>
