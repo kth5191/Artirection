@@ -19,10 +19,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/writeProc")
-	public String writeProc(String bTitle, String bContents) {
+	public String writeProc(String bTitle, String bContents, int bGrade) {
 		BoardDTO dto = new BoardDTO();
 		dto.setbTitle(bTitle);
 		dto.setbContents(bContents);
+		dto.setbGrade(bGrade);
+
 		service.insert(dto);
 		
 		return "redirect:/";
