@@ -4,6 +4,6 @@
 
 <mapper namespace="Board">
 	<insert id="insert">
-		INSERT INTO board VALUES (null, 0, 'cypher_1013', #{bTitle}, #{bContents}, #{bGrade}, now())
+		INSERT INTO board VALUES (null, 0, #{bID}, #{bTitle}, #{bContents}, #{bGrade}, now())
 	</insert>
 </mapper>
