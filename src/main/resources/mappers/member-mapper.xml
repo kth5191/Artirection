@@ -23,5 +23,10 @@
 	<select id="login" resultType="Boolean">
 		select count(*) from members where mID=#{id} and pw=#{pw}
 	</select>
+	
+	<!-- 로그안 이이디로 내정보 확인 -->
+	<select id="selectById" resultType="com.artirection.dto.MemberDTO">
+		SELECT * FROM members WHERE mID = #{id};
+	</select>
 
 </mapper>

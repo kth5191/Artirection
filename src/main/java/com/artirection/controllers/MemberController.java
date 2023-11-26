@@ -2,6 +2,7 @@ package com.artirection.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -144,5 +145,15 @@ public class MemberController {
 		return "redirect:/member/gologin";
 	}
 	
-	
+	// 내정보 & 내기록
+	@RequestMapping("myRecord")
+	public String myRecode(Model model) {
+		String loginID = (String) session.getAttribute("loginID");
+		
+		MemberDTO dto = mservice.selectById(loginID);
+		
+		model.addAttribute("dto", dto);
+		
+		return "/member/myRecord";
+	}
 }
