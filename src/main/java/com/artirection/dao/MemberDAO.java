@@ -34,5 +34,8 @@ public class MemberDAO {
 		return db.update("member.updatePW", param);
 	}
 	
-	
+	// 로그인 id로 내정보 확인
+	public MemberDTO selectById(String id) {
+		return db.selectOne("member.selectById", id);
+	}
 }

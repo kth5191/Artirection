@@ -42,4 +42,9 @@ public class MemberService {
 		
 		return mdao.login(param);
 	}
+	
+	// 로그인 id로 내정보 확인
+	public MemberDTO selectById(String id) {
+		return mdao.selectById(id);
+	}
 }
