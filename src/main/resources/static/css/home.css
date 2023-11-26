@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.container {
+    max-width: 1040px;
+    min-width: 300px;
+    margin: auto;
+}
+
+#monthTitle {
+    margin-top: 150px;
+    margin-bottom: 30px;
+    font-size: 35px;
+}
+
+#monthExhibition {
+    margin-bottom: 50px;
+}
+
+
+.wrap1 {
+    width: 80%;
+    border: 1px solid #C3C5C5;
+    margin: 60px auto 0px;
+}
+
+.wrap2 {
+    padding-top: 45%;
+    position: relative;
+    width: 100%;
+}
+
+.content {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
