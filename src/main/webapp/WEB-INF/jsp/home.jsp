@@ -9,10 +9,10 @@
 	<title>Artirection</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	
-	<!-- main.css -->
+	<!-- css, js -->
     <link rel="stylesheet" href="/css/main.css">
-    <!-- index.css -->
     <link rel="stylesheet" href="/css/home.css">
+    <script src="/js/home.js"></script>
 
     <!-- bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -35,16 +35,6 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-            var options = { //지도를 생성할 때 필요한 기본 옵션
-                center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-                level: 3 //지도의 레벨(확대, 축소 정도)
-            };
-
-            var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-        </script>
 
         <div id="monthTitle" class="colorBlack">이 달의 전시</div>
         <div id="monthExhibition" class="carousel slide" data-bs-ride="carousel">
