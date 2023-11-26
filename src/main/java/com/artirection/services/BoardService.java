@@ -9,9 +9,9 @@ import com.artirection.dto.BoardDTO;
 @Service
 public class BoardService {
 	@Autowired
-	private BoardDAO dao;
+	private BoardDAO bdao;
 	
 	public int insert(BoardDTO dto) {
-		return dao.insert(dto);
+		return bdao.insert(dto);
 	}
 }
