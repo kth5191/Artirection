@@ -40,7 +40,7 @@
                                 <a class="nav-link colorWhite" href="#"> 마이페이지 </a>
                             </li>
                             <li class="nav-item col-3 text-center">
-                                <a class="nav-link colorWhite" href="#"> 로그인 </a>
+                                <a class="nav-link colorWhite" href="/member/gologin"> 로그인 </a>
                             </li>
                             <!-- <c:choose>
                                 <c:when test="${loginID == null }">
