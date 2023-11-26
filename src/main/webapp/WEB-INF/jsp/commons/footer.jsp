@@ -8,7 +8,7 @@
 	
 	<!-- css, js -->
 	<link rel="stylesheet" href="/css/main.css">
-	<link rel="stylesheet" href="/css/commons/header.css">
+	<link rel="stylesheet" href="/css/commons/footer.css">
 	
 	<!-- bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
