@@ -1,4 +1,4 @@
-package com.artireciton.xmlparsing;
+package com.artirection.xmlparsing;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
