@@ -13,19 +13,19 @@ import com.artirection.services.BoardService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/board/")
 public class BoardController {
 	@Autowired
 	private HttpSession session;
 	@Autowired
 	private BoardService service;
 	
-	@RequestMapping("/write")
+	@RequestMapping("write")
 	public String write() {
 		return "/board/write";
 	}
 	
-	@RequestMapping("/writeProc")
+	@RequestMapping("writeProc")
 	public String writeProc(BoardDTO dto) throws Exception {
 		String writer = (String) session.getAttribute("loginID");
 		dto.setbID(writer);
@@ -33,5 +33,10 @@ public class BoardController {
 		service.insert(dto);
 		
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/favorite")
+	public String favorite() {
+		return "/board/favorite";
 	}
 }

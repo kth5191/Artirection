@@ -1,0 +1,53 @@
+
+@font-face {
+    font-family: 'JeonjuCraftGoR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/JeonjuCraftGoR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    box-sizing: border-box;
+    font-family: 'JeonjuCraftGoR';
+    
+}
+.container{
+    max-width: 1400px !important;
+    min-width: 300px;
+    margin: auto;
+}
+
+.contentBox{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.favoriteBox{
+    font-weight:bold;
+}
+
+.contentBox .imgBox{
+    width: 15%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.contentBox .descBox{
+    height: 100%;
+    width: 900px;
+}
+
+.titleBox,.deBox{
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    margin-top: 5px;
+}
+
+.place{
+    margin-top: 15px;
+}
