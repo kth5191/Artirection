@@ -109,104 +109,134 @@
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
+	// 지도의 전시회 정보 저장 배열
+	var mapData=[];
+	// 마커 배열
+	var markers = [];
+	
+	
+	// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+	function removeMarker(markers) {
+		if(markers !== undefined){
+			for ( var i = 0; i < markers.length;i++ ) {
+//				infowindows.close();
+				console.log(i);
+				markers[i].setMap(null);
+			}
+			markers = [];
+		}
+		
+	}
+	
 	$(document).on("click","#search",function(){
 		
+		removeMarker(markers);
+		var sidoIdx=hangjungdong.sido.findIndex(i=>i.sido==$("#sido").val());
+		var sigugunIdx=hangjungdong.sigugun.findIndex(i=>i.sigugun==$("#sigugun").val()&&i.sido==$("#sido").val());
+			
 		
-	var sidoIdx=hangjungdong.sido.findIndex(i=>i.sido==$("#sido").val());
-	var sigugunIdx=hangjungdong.sigugun.findIndex(i=>i.sigugun==$("#sigugun").val()&&i.sido==$("#sido").val());
-		
+		$.ajax({
+			url:"/api/selectByArea",
+			type:"GET",
+			dataType:"text",
+			data:{
+				sido : hangjungdong.sido[sidoIdx].codeNm, //시
+				sigungu : hangjungdong.sigugun[sigugunIdx].codeNm  //시군구
+			}
+			
+		}).done(function(resp){
+			// console.log(resp);
+			
+			removeMarker();
+			
+			var one;
+			var mapData=[];
+			for(let temp=0;temp<resp.length;resp++){
+				
+				$(resp).find("perforList").each(function(){
+					
+					var tmTitle = $(this).find("title").text();
+					var tmX = $(this).find("gpsX").text();
+					var tmY = $(this).find("gpsY").text();
+					var tmImg = $(this).find("thumbnail").text();
+					var tmSeq = $(this).find("seq").text();
+					
+					
+					one = [tmY,tmX,tmTitle,tmImg,tmSeq];
+					
+	// 				console.log(one);
+					mapData.push(one);
+				})
+				
+			}
+			
+			// console.log(mapData);
 	
-	$.ajax({
-		url:"/api/selectByArea",
-		type:"GET",
-		dataType:"text",
-		data:{
-			sido : hangjungdong.sido[sidoIdx].codeNm, //시
-			sigungu : hangjungdong.sigugun[sigugunIdx].codeNm  //시군구
-		}
-		
-	}).done(function(resp){
-			console.log(resp);
-		
-		var one;
-		var mapData=[];
-		for(let temp=0;temp<resp.length;resp++){
+	
+			// 인포윈도우 배열
+			var infowindows = [];
 			
-			$(resp).find("perforList").each(function(){
-				
-				var tmTitle = $(this).find("title").text();
-				var tmX = $(this).find("gpsX").text();
-				var tmY = $(this).find("gpsY").text();
-				var tmImg = $(this).find("thumbnail").text();
-				var tmSeq = $(this).find("seq").text();
-				
-//					console.log(tmTitle);
-				
-				one = [tmY,tmX,tmTitle,tmImg,tmSeq];
-				
-				console.log(one);
-				mapData.push(one);
-			})
 			
-		}
-		
-		console.log(mapData);
-
-
-		// 인포윈도우 배열
-		var infowindows = [];
-		mapData.forEach(function(data){
+			mapData.forEach(function(data){
+				
+				
+				
+	            // 지도에 마커를 생성하고 표시한다
+	            var marker = new kakao.maps.Marker({
+	                position: new kakao.maps.LatLng(data[0],data[1]), // 마커의 좌표
+	                map: map // 마커를 표시할 지도 객체
+	            });
+	            markers.push(marker);
+	            
+	            
+	            // 인포 윈도우에 표시할 내용
+	            var iwContent = '<div class="markContent" style="padding:5px;"> <div><img class="markThumbnail" src='+data[3]+'></div>'+data[2]+'</div>'+'<div>'+data[4]+'</div>',
+	            	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시
+	            
+	            
+	            var infowindow = new kakao.maps.InfoWindow({
+	                position : marker.getPosition(), 
+	                content : iwContent,
+	                removable : iwRemoveable //true
+	            });
+	            
+	            // 생성된 인포윈도우를 배열에 담아줍니다.
+	            infowindows.push(infowindow);
+	            
+	         	// 마커에 해당하는 인포윈도우 index를 저장합니다.
+	            marker.infowindowIdx = infowindows.length - 1;
+	         
+	         	// 하나의 인포윈도우를 클릭하면 나머지는 닫힘
+	            kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {
+	                allInfowindowClose();
+	
+	                // 마커에 해당되는 infowindow를 열어줍니다.
+	                var infowindow = infowindows[this.infowindowIdx];
+	                infowindow.open(map, this);
+	                
+	            });
+	         	
+			});
 			
-            // 지도에 마커를 생성하고 표시한다
-            var marker = new kakao.maps.Marker({
-                position: new kakao.maps.LatLng(data[0], data[1],data[2],data[3],data[4]), // 마커의 좌표
-                map: map // 마커를 표시할 지도 객체
-            });
-            
-            // 인포 윈도우에 표시할 내용
-            var iwContent = '<div class="markContent" style="padding:5px;"> <div><img class="markThumbnail" src='+data[3]+'></div>'+data[2]+'</div>'+'<div>'+data[4]+'</div>',
-            	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시
-            
-            
-            var infowindow = new kakao.maps.InfoWindow({
-                position : marker.getPosition(), 
-                content : iwContent,
-                removable : iwRemoveable //true
-            });
-            
-            // 생성된 인포윈도우를 배열에 담아줍니다.
-            infowindows.push(infowindow);
-            
-         	// 마커에 해당하는 인포윈도우 index를 저장합니다.
-            marker.infowindowIdx = infowindows.length - 1;
-         
-            kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {
-                allInfowindowClose();
+			console.log("마커스 길이"+markers.length);
+			
+			
+			// 모든 infowindow를 닫아줍니다. - 필요
+			function allInfowindowClose() {
+			    for(var i=0; i<infowindows.length; i++) {
+			        var infowindow = infowindows[i];
+			        infowindow.close();
+			    }
+			}
+			
+			
 
-                // 마커에 해당되는 infowindow를 열어줍니다.
-                var infowindow = infowindows[this.infowindowIdx];
-                infowindow.open(map, this);
-                
-            });
-            
-	        
-         
+			
 		});
 		
-		// 모든 infowindow를 닫아줍니다.
-		function allInfowindowClose() {
-		    for(var i=0; i<infowindows.length; i++) {
-		        var infowindow = infowindows[i];
-		        infowindow.close();
-		    }
-		}
 		
 	});
-	});
 	
-// 	$(document).on("click",function(){
-// 		console.log($(this));
-// 	})
 
 </script>
 
