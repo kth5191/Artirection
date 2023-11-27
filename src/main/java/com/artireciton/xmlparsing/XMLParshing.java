@@ -21,11 +21,11 @@ public class XMLParshing {
 	}
 	
 	public static void main(String[] args) {
-		// int page = 1; // 페이지 초기값
+		int page = 1; // 페이지 초기값
 		try {
 			while(true) {
 				// parsing할 url (API 키 포함)
-				String url = "http://www.culture.go.kr/openapi/rest/publicperformancedisplays/period?serviceKey=WTN3HpCtoUbvSxoTg3w7og3Y2piCph2NEpXjiv9QSHsVyTp1ezvYXUPvm4ntMkEIiub%2FLGlzFzf7NpLn2I5cow%3D%3D&sortStdr=2";
+				String url = "http://www.culture.go.kr/openapi/rest/publicperformancedisplays/period?serviceKey=WTN3HpCtoUbvSxoTg3w7og3Y2piCph2NEpXjiv9QSHsVyTp1ezvYXUPvm4ntMkEIiub%2FLGlzFzf7NpLn2I5cow%3D%3D&sortStdr=2&cPage=" + page;
 				
 				// 페이지에 접근할 Document 객체 생성
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -55,7 +55,14 @@ public class XMLParshing {
 					System.out.println("GPS-X좌표 : " + getTagValue("gpsX", eElement));
 					System.out.println("GPS-Y좌표 : " + getTagValue("gpsY", eElement));
 				}
+				
+				page += 1;
+				System.out.println("page number : " + page);
+				if(page > 12) {
+					break;
+				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
