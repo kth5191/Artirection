@@ -22,7 +22,7 @@
 <body>
 	<header class="header bColorLightGreen">
         <div class="header_guide">
-            <a href="/home.jsp">
+            <a href="/">
                 <div class="logo colorWhite">Artirection</div>
             </a>
             <nav class="navbar navbar-expand navbar-light colorWhite mb0">
