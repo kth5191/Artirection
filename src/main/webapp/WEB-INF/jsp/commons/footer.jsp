@@ -25,7 +25,7 @@
 					<div class="footer_title colorWhite">QUICK LINKS</div>
 					<div class="footer_con">
 						<a href="/preview" class="con colorWhite">관람하기</a>
-						<a href="/" class="con colorWhite">찜한 목록</a>
+						<a href="/board/favorite" class="con colorWhite">찜한 목록</a>
 						<a href="/member/myRecord" class="con colorWhite">마이페이지</a>
 						<a href="/member/gologin" class="con colorWhite">로그인</a>
 					</div>

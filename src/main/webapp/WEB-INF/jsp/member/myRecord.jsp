@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +61,11 @@
 						<span>|</span>
 					</div>
 					<div class="userPhone col-8 col-md-10">
-						<span>${dto.phone }</span>
+						<span>
+							${fn:substring(dto.phone,0,3) }-
+							${fn:substring(dto.phone,3,7) }-
+							${fn:substring(dto.phone,7,11) }
+						</span>
 					</div>
 				</div>
 				<div class="emailBox row">

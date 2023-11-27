@@ -18,31 +18,29 @@
 <!-- kakaomap -->
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65ff7e05f6753f3faa6cb9cbf7667308&libraries=services,clusterer,drawing"></script>
-<style>
-	i {
-		cursor:pointer;
-	}
-</style>
+<script src="/js/preview.js"></script>
+<script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
 </head>
 <body>
+	
 	<div class="container border">
 		<div class="contents" id="title">관람하기</div>
 		<div class="contents border" id="map">
 		</div>
 		<nav class="navbar navbar-expand contents d-none d-lg-block">
 			<ul class="navbar-nav">
-				<li class="nav-item border"><a class="nav-link" href="#">시/도 선택</a></li>
-				<li class="nav-item border"><a class="nav-link" href="#">시/군/구 선택</a></li>
-				<li class="nav-item border"><a class="nav-link" href="#">박물관/미술관 선택</a></li>
+				<li class="nav-item border"><select id="sido"><option value="">시/도 선택</option></select></li>
+				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
+				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
 				<li class="nav-item border" id="search-btn"><a class="nav-link text-white" href="#">검색</a></li>
 			</ul>
 		</nav>
 
 		<nav id="small-navbar" class="navbar contents d-block d-lg-none">
 			<ul class="navbar-nav">
-				<li class="nav-item border"><a class="nav-link" href="#">시/도 선택</a></li>
-				<li class="nav-item border"><a class="nav-link" href="#">시/군/구 선택</a></li>
-				<li class="nav-item border"><a class="nav-link" href="#">박물관/미술관 선택</a></li>
+				<li class="nav-item border"><select id="sido"><option value="">시/도 선택</option></select></li>
+				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
+				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
 				<li class="nav-item border" id="search-btn"><a class="nav-link text-white" href="#">검색</a></li>
 			</ul>
 		</nav>
@@ -77,69 +75,5 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		$(".icon1").on("click", function() {
-			$(this).toggleClass("bi-heart bi-heart-fill");
-		});
-		
-		$(document).ready(function() {
-			// 카카오 지도 띄우기
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = { 
-		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		        level: 5 // 지도의 확대 레벨 
-		    }; 
-
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			
-			// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-			if (navigator.geolocation) {
-			    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-			    navigator.geolocation.getCurrentPosition(function(position) {
-			        
-			        var lat = position.coords.latitude, // 위도
-			            lon = position.coords.longitude; // 경도
-			        
-			        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-			            message = '<div style="padding:5px;">내 위치</div>'; // 인포윈도우에 표시될 내용입니다
-			        
-			        // 마커와 인포윈도우를 표시합니다
-			        displayMarker(locPosition, message);
-			            
-			      });
-			    
-			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-			    
-			    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-			        message = 'geolocation을 사용할수 없어요..'
-			        
-			    displayMarker(locPosition, message);
-			}
-			
-			// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-			function displayMarker(locPosition, message) {
-			    // 마커를 생성합니다
-			    var marker = new kakao.maps.Marker({  
-			        map: map, 
-			        position: locPosition
-			    }); 
-			    
-			    var iwContent = message, // 인포윈도우에 표시할 내용
-			        iwRemoveable = true;
-			
-			    // 인포윈도우를 생성합니다
-			    var infowindow = new kakao.maps.InfoWindow({
-			        content : iwContent,
-			        removable : iwRemoveable
-			    });
-			    
-			    // 인포윈도우를 마커위에 표시합니다 
-			    infowindow.open(map, marker);
-			    
-			    // 지도 중심좌표를 접속위치로 변경합니다
-			    map.setCenter(locPosition);      
-			}    
-		});
-	</script>
 </body>
 </html>
