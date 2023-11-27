@@ -61,6 +61,14 @@ public class XMLParshing {
 				if(page > 12) {
 					break;
 				}
+				
+//				NodeList nList = doc.getElementsByTagName("msgBody");
+//				
+//				Node nNode = nList.item(0);
+//				Element eElement = (Element) nNode;
+//				int totalCount = Integer.parseInt(getTagValue("totalCount", eElement));
+//				int pageLength = totalCount / 10 + 1;
+//				break;
 			}
 			
 		} catch (Exception e) {
