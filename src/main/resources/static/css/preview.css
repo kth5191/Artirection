@@ -86,12 +86,12 @@
     font-size: 15px;
 }
 
-#icon1 {
+.icon1 {
     position: absolute;
     right: 0px;
 }
 
-#icon2 {
+.icon2 {
     position: absolute;
     right: 30px;
 }
