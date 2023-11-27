@@ -31,13 +31,13 @@
                         <ul class="navbar-nav row g-0 w-100">
                             
                             <li class="nav-item col-3 text-center">
-                                <a class="nav-link colorWhite" href="#"> 관람하기 </a>
+                                <a class="nav-link colorWhite" href="/preview"> 관람하기 </a>
                             </li>
                             <li class="nav-item col-3 text-center">
                                 <a class="nav-link colorWhite" href="#"> 찜한 목록 </a>
                             </li>
                             <li class="nav-item col-3 text-center">
-                                <a class="nav-link colorWhite" href="#"> 마이페이지 </a>
+                                <a class="nav-link colorWhite" href="/member/myRecord"> 마이페이지 </a>
                             </li>
                             <li class="nav-item col-3 text-center">
                                 <a class="nav-link colorWhite" href="/member/gologin"> 로그인 </a>
