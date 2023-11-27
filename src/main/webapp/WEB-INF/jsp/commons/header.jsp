@@ -39,7 +39,7 @@
                             <c:choose>
                                 <c:when test="${loginID == null }">
                                     <li class="nav-item dropdown col-3 text-end p8"><a
-                                            class="text-white fontEnglish" href="/member/gologin"> LOGIN </a></li>
+                                            class="text-white fontEnglish" href="/member/gologin"> 로그인 </a></li>
                                 </c:when>
                                 <c:otherwise>
                                 	<li class="nav-item col-3 text-center">
