@@ -22,7 +22,7 @@
 <title>나의 기록</title>
 </head>
 <body>
-
+	<%@ include file="../commons/header.jsp" %>
 	<div class="container">
 
 		<div class="myInfoBox col-12">
@@ -123,5 +123,6 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="../commons/footer.jsp" %>
 </body>
 </html>
