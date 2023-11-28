@@ -251,8 +251,9 @@
 			                    iconWrite.append(iconWriteATag);
 			                    
 
-			                    let iconHeart = $("<div class='icon1'>");
-			                        let iconHeartIcon = $("<i class='bi bi-heart'></i>");
+			                    let iconHeart = $("<div>");
+			                    iconHeart.attr("id", tmSeq);
+			                    let iconHeartIcon = $("<i class='icon1 bi bi-heart'></i>");
 			                    iconHeart.append(iconHeartIcon);
 
 			                exhibition__icon.append(iconWrite).append(iconHeart);
@@ -337,6 +338,26 @@
 			
 		});
 		
+	});
+	
+	$(document).on("click", ".icon1", function() {
+		$(this).toggleClass("bi-heart bi-heart-fill");
+		
+		let parentSeq = $(this).parent().attr("id");
+		
+		if($(this).attr("class") == 'icon1 bi bi-heart-fill') {
+			$.ajax({
+				url:"/favorite/insert",
+				type:"POST",
+				dataType:"text",
+				data:{
+					seq : parentSeq
+				}
+				
+			}).done(function(resp){})
+		} else {
+			console.log("delete");
+		}
 	});
 	
 
