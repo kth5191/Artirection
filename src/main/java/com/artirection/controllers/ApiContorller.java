@@ -54,6 +54,49 @@ public class ApiContorller {
 	        
 	        return sb.toString();
 		
+	}
+	
+	// 지역별 공연/전시 목록 조회
+	@ResponseBody
+	@RequestMapping(value="selectByArea", method=RequestMethod.GET, produces="application/text;charset=utf8")
+	public String rtSelectByArea(String sido,String sigungu, Model model) throws IOException{
 		
+		System.out.println("시도 : "+sido);
+		System.out.println("시군구 : "+sigungu);
+		
+		
+	      StringBuilder urlBuilder = new StringBuilder("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/area"); /*URL*/
+	        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=WTN3HpCtoUbvSxoTg3w7og3Y2piCph2NEpXjiv9QSHsVyTp1ezvYXUPvm4ntMkEIiub%2FLGlzFzf7NpLn2I5cow%3D%3D"); /*Service Key*/
+	        urlBuilder.append("&" + URLEncoder.encode("sido","UTF-8") + "=" + URLEncoder.encode(sido, "UTF-8")); /*시도*/
+	        urlBuilder.append("&" + URLEncoder.encode("gugun","UTF-8") + "=" + URLEncoder.encode(sigungu, "UTF-8")); /*군구*/
+	        urlBuilder.append("&" + URLEncoder.encode("rows","UTF-8") + "=" + URLEncoder.encode("100", "UTF-8")); /**/
+	        
+	        URL url = new URL(urlBuilder.toString());
+	        
+	        System.out.println(url);
+	        
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Content-type", "application/json");
+	        System.out.println("Response code: " + conn.getResponseCode());
+	        BufferedReader rd;
+	        
+	        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+	            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        } else {
+	            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	        }
+	        StringBuilder sb = new StringBuilder();
+	        String line;
+	        while ((line = rd.readLine()) != null) {
+	            sb.append(line);
+	        }
+	        rd.close();
+	        
+	        conn.disconnect();
+	        
+	        return sb.toString();
+		
+	
 	}
 }

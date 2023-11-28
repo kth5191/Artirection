@@ -23,7 +23,7 @@
 </head>
 <body>
 
-
+<%@ include file="./commons/header.jsp" %>
 	<div class="container">
 		<div class="favoriteBox">
 			<h3 class="favoriteBox col-12">찜한 목록</h3>
@@ -59,5 +59,6 @@
 				</div>
 			</div>
 		</div>
+		 <%@ include file="./commons/footer.jsp" %>
 </body>
 </html>
