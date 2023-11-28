@@ -22,7 +22,7 @@
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
 </head>
 <body>
-	
+	<%@ include file="./commons/header.jsp" %>
 	<div class="container border">
 		<div class="contents" id="title">관람하기</div>
 		<div class="contents border" id="map">
@@ -75,6 +75,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="./commons/footer.jsp" %>
 </body>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

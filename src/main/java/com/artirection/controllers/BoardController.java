@@ -35,8 +35,13 @@ public class BoardController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/favorite")
+	@RequestMapping("favorite")
 	public String favorite() {
 		return "/board/favorite";
+	}
+	
+	@RequestMapping("detail")
+	public String detail() {
+		return "/board/detail";
 	}
 }
