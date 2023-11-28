@@ -1,11 +1,9 @@
 package com.artirection.controllers;
 
-import java.sql.Timestamp;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.artirection.dto.BoardDTO;
 import com.artirection.services.BoardService;
@@ -41,7 +39,11 @@ public class BoardController {
 	}
 	// 상세페이지 이동
 	@RequestMapping("detail")
-	public String detail() {
+	public String detail(Model model, String seq) {
+		model.addAttribute("seq", seq);
+		
+		System.out.println(seq);
+		
 		return "/board/detail";
 	}
 }

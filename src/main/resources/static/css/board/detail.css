@@ -21,11 +21,13 @@
 
 .detailBox {
 	padding-left: 50px;
+	padding-top: 60px;
 }
 
 .title {
 	font-size: 30px;
 	margin-bottom: 100px;
+	font-weight: bold;
 }
 
 .infoBox div {
@@ -78,4 +80,14 @@
 
 .userStar {
 	width: 5%;
+}
+
+/*api 이미지*/
+.ImageBox {
+	text-align: center;
+	border: none;
+}
+
+.ImageBox__inner{
+	height: 700px;
 }
