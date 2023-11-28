@@ -46,56 +46,66 @@
 				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
 				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
 				<li class="nav-item border" id="search-btn">
-				<a class="nav-link text-white"></a>
-					<button id="search">검색</button>
+<!-- 				<a class="nav-link text-white"></a> -->
+					<button class="nav-link text-white" id="search">검색</button>
 				</li>
 			</ul>
 		</nav>
 
-<!-- 		<nav id="small-navbar" class="navbar contents d-block d-lg-none"> -->
-<!-- 			<ul class="navbar-nav"> -->
-<!-- 				<li class="nav-item border"><select id="sido"><option value="">시/도 선택</option></select></li> -->
-<!-- 				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li> -->
-<!-- 				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li> -->
-<!-- 				<li class="nav-item border" id="search-btn"><a class="nav-link text-white" href="#">검색</a></li> -->
-<!-- 			</ul> -->
-<!-- 		</nav> -->
-
-		<div class="search-div contents border">
-			<div class=" search-title ">전시회1</div>
-			<div class=" search-contents ">전시회 설명 블라블라 어쩌구 저쩌구 여기에 다 쓰시면 됩니다 길어지면 아래로 내려가게끔 width는 850px? 정도면 적당할 것 같네요만약에 더 길어진다면 ...으로 처리하면 좋을 것 같아요</div>
-			<div class="search-location">
-				<div>
-					전시장소 <a href="/board/write"><i class="bi bi-pencil-fill icon2"></i></a> <i class="bi bi-heart icon1"></i>
-				</div>
-			</div>
+		<nav id="small-navbar" class="navbar contents d-block d-lg-none">
+			<ul class="navbar-nav">
+				<li class="nav-item border"><select id="sido"><option value="">시/도 선택</option></select></li>
+				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
+				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
+				<li class="nav-item border" id="search-btn"><a class="nav-link text-white" href="#">검색</a></li>
+			</ul>
+		</nav>
+		
+		<div class="exhibition__content">
+		
 		</div>
 
-		<div class="search-div contents border">
-			<div class=" search-title ">전시회1</div>
-			<div class=" search-contents ">전시회 설명 블라블라 어쩌구 저쩌구 여기에 다 쓰시면 됩니다 길어지면 아래로 내려가게끔 width는 850px? 정도면 적당할 것 같네요만약에 더 길어진다면 ...으로 처리하면 좋을 것 같아요</div>
-			<div class="search-location">
-				<div>
-					전시장소 <a href="/board/write"><i class="bi bi-pencil-fill icon2"></i></a> <i class="bi bi-heart icon1"></i>
-				</div>
-			</div>
-		</div>
+<!-- 		<div class="search-div contents border"> -->
+<!--             <div class="search__img"> -->
+<!--             	<img class="exhibition__img" src="http://www.culture.go.kr/upload/rdf/23/05/show_2023051813454323122.jpg"> -->
+<!--             </div> -->
+            
+<!-- 			<div class="exhibition__inner"> -->
+<!--                 <div class="exhibition__title "> -->
+<!--                 	[온라인 특별전] 막걸리, 거친 일상의 벗 -->
+<!--                 </div> -->
+<!--                 <div class="exhibition__contents "> -->
+<!--                     20231101~20231204 -->
+<!--                 </div> -->
+<!--                 <div class="exhibition__location"> -->
+<!--                     <div class="exhibition__area"> -->
+<!--                         서울 -->
+<!--                     </div> -->
+<!--                     <div class="exhibition__place"> -->
+<!--                         국립민속박물관 -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--                 <div class="exhibition__icon"> -->
+<!--                     <div class="icon2"> -->
+<!--                         <a href="/board/write"> -->
+<!--                         	<i class="bi bi-pencil-fill"></i> -->
+<!--                         </a> -->
+<!--                     </div> -->
+<!--                    <div class="icon1"> -->
+<!--                         <i class="bi bi-heart"></i> -->
+<!--                    </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!-- 		</div> -->
+		
 
-		<div class="search-div contents border">
-			<div class=" search-title ">전시회1</div>
-			<div class=" search-contents ">전시회 설명 블라블라 어쩌구 저쩌구 여기에 다 쓰시면 됩니다 길어지면 아래로 내려가게끔 width는 850px? 정도면 적당할 것 같네요만약에 더 길어진다면 ...으로 처리하면 좋을 것 같아요</div>
-			<div class="search-location">
-				<div>
-					전시장소 <a href="/board/write"><i class="bi bi-pencil-fill icon2"></i></a> <i class="bi bi-heart icon1"></i>
-				</div>
-			</div>
-		</div>
 	</div>
 	 <%@ include file="./commons/footer.jsp" %>
 </body>
 
 <script>
 
+	// 시군구, 인덱스 받아옴
 	var sidoIdx=hangjungdong.sido.findIndex(i=>i.sido==$("#sido").val());
 	var sigugunIdx=hangjungdong.sigugun.findIndex(i=>i.sigugun==$("#sigugun").val()&&i.sido==$("#sido").val());
 		
@@ -103,17 +113,75 @@
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = { 
 	    center: new kakao.maps.LatLng(37.54322842, 126.988345046), // 지도의 중심좌표
-	    level: 9 // 지도의 확대 레벨
+	    level: 8 // 지도의 확대 레벨
 	};
 	
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
+	
+	
+	
+	
+	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+	  if (navigator.geolocation) {
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	    navigator.geolocation.getCurrentPosition(function (position) {
+	      var lat = position.coords.latitude, // 위도
+	        lon = position.coords.longitude; // 경도
+
+	      var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+	        message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+
+	      // 마커와 인포윈도우를 표시합니다
+	      displayMarker(locPosition, message);
+	    });
+	    
+	  } else {
+	    // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+	      message = "geolocation을 사용할수 없어요..";
+
+	    displayMarker(locPosition, message);
+	  }
+
+	  // 지도에 마커와 인포윈도우를 표시하는 함수입니다
+	  function displayMarker(locPosition, message) {
+	    // 마커를 생성합니다
+	    var marker = new kakao.maps.Marker({
+	      map: map,
+	      position: locPosition,
+	    });
+	    
+	    var iwContent = message, // 인포윈도우에 표시할 내용
+	      iwRemoveable = true;
+
+	    // 인포윈도우를 생성합니다
+	    var infowindow = new kakao.maps.InfoWindow({
+	      content: iwContent,
+	      removable: iwRemoveable,
+	    });
+
+	    // 인포윈도우를 마커위에 표시합니다
+	    infowindow.open(map, marker);
+
+	    // 지도 중심좌표를 접속위치로 변경합니다
+	    map.setCenter(locPosition);
+	  }
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 지도의 전시회 정보 저장 배열
 	var mapData=[];
 	// 마커 배열
 	var markers = [];
-	
 	
 	// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 	function removeMarker(markers) {
@@ -145,7 +213,7 @@
 			}
 			
 		}).done(function(resp){
-			// console.log(resp);
+			//onsole.log(resp);
 			
 			removeMarker();
 			
@@ -160,13 +228,81 @@
 					var tmY = $(this).find("gpsY").text();
 					var tmImg = $(this).find("thumbnail").text();
 					var tmSeq = $(this).find("seq").text();
+					var tmStartDate = $(this).find("startDate").text();
+					var tmEndDate = $(this).find("endDate").text();
+					var tmArea = $(this).find("area").text();
+					var tmPlace = $(this).find("place").text();
 					
 					
 					one = [tmY,tmX,tmTitle,tmImg,tmSeq];
 					
-	// 				console.log(one);
+	 				console.log(one);
 					mapData.push(one);
+					
+					
+//			 		jquery
+					let exhibition__content = $(".exhibition__content");
+
+					let search_div = $("<div class='search-div contents border'>");
+
+			        let img_div = $("<div class='search__img'>");
+			            let img = $("<img class='exhibition__img'> ");
+			                img.attr("src",tmImg);
+			            img_div.append(img);
+			            
+			            
+			            
+			            let exhibition__inner = $("<div class='exhibition__inner'>");
+
+			                let exhibition__title = $("<div class='exhibition__title'>");
+			                    exhibition__title.html(tmTitle);
+
+			                let exhibition__contents = $("<div class='exhibition__contents'>");
+			                    exhibition__contents.html(tmStartDate+" ~ "+tmEndDate);
+			                
+			                let exhibition__location = $("<div class='exhibition__location'>");
+			                    let exhibition__area = $("<div class='exhibition__area'>");
+			                        exhibition__area.html("서울");
+			                    let exhibition__place = $("<div class='exhibition__place'>");
+			                        exhibition__place.html(tmPlace);
+			                
+			                exhibition__location.append(exhibition__area).append(exhibition__place);
+
+			                let exhibition__icon = $("<div class='exhibition__icon'>");
+			                    let iconWrite = $("<div class='icon2'>");
+			                        let iconWriteATag = $("<a href='/board/write'>");
+			                            let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
+			                        iconWriteATag.append(icontWriteIcon);
+			                    iconWrite.append(iconWriteATag);
+			                    
+
+			                    let iconHeart = $("<div class='icon1'>");
+			                        let iconHeartIcon = $("<i class='bi bi-heart'></i>");
+			                    iconHeart.append(iconHeartIcon);
+
+			                exhibition__icon.append(iconWrite).append(iconHeart);
+
+
+
+			            exhibition__inner.append(exhibition__title).append(exhibition__contents).append(exhibition__location).append(exhibition__icon);
+
+			        search_div.append(img_div).append(exhibition__inner);
+					
+			        exhibition__content.append(search_div);
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 				})
+				
+				
 				
 			}
 			
@@ -233,7 +369,6 @@
 
 			
 		});
-		
 		
 	});
 	
