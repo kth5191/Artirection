@@ -229,7 +229,8 @@
 			            
 			            let exhibition__inner = $("<div class='exhibition__inner'>");
 
-			                let exhibition__title = $("<div class='exhibition__title'>");
+			            	// 디테일 페이지로 이동
+			                let exhibition__title = $("<a href=/board/detail?seq="+tmSeq+"><div class='exhibition__title'>");
 			                    exhibition__title.html(tmTitle);
 
 			                let exhibition__contents = $("<div class='exhibition__contents'>");
@@ -240,8 +241,10 @@
 			                        exhibition__area.html(realmName);
 			                    let exhibition__place = $("<div class='exhibition__place'>");
 			                        exhibition__place.html(tmPlace);
+			                    let exhibition__seq = $("<div>");
+			                    	exhibition__seq.html(tmSeq);
 			                
-			                exhibition__location.append(exhibition__area).append(exhibition__place);
+			                exhibition__location.append(exhibition__area).append(exhibition__place).append(exhibition__seq);
 
 			                let exhibition__icon = $("<div class='exhibition__icon'>");
 			                    let iconWrite = $("<div class='icon2'>");
@@ -251,8 +254,9 @@
 			                    iconWrite.append(iconWriteATag);
 			                    
 
-			                    let iconHeart = $("<div class='icon1'>");
-			                        let iconHeartIcon = $("<i class='bi bi-heart'></i>");
+			                    let iconHeart = $("<div>");
+			                    iconHeart.attr("id", tmSeq);
+			                    let iconHeartIcon = $("<i class='icon1 bi bi-heart'></i>");
 			                    iconHeart.append(iconHeartIcon);
 
 			                exhibition__icon.append(iconWrite).append(iconHeart);
@@ -337,6 +341,34 @@
 			
 		});
 		
+	});
+	
+	$(document).on("click", ".icon1", function() {
+		$(this).toggleClass("bi-heart bi-heart-fill");
+		
+		let parentSeq = $(this).parent().attr("id");
+		
+		if($(this).attr("class") == 'icon1 bi bi-heart-fill') {
+			$.ajax({
+				url:"/favorite/insert",
+				type:"POST",
+				dataType:"text",
+				data:{
+					seq : parentSeq
+				}
+				
+			}).done(function(resp){})
+		} else {
+			$.ajax({
+				url:"/favorite/delete",
+				type:"POST",
+				dataType:"text",
+				data:{
+					seq : parentSeq
+				}
+				
+			}).done(function(resp){})
+		}
 	});
 	
 
