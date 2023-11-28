@@ -356,7 +356,15 @@
 				
 			}).done(function(resp){})
 		} else {
-			console.log("delete");
+			$.ajax({
+				url:"/favorite/delete",
+				type:"POST",
+				dataType:"text",
+				data:{
+					seq : parentSeq
+				}
+				
+			}).done(function(resp){})
 		}
 	});
 	

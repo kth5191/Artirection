@@ -14,4 +14,8 @@ public class FavoriteService {
 	public int insert(FavoriteDTO dto) {
 		return fdao.insert(dto);
 	}
+	
+	public int delete(FavoriteDTO dto) {
+		return fdao.delete(dto);
+	}
 }

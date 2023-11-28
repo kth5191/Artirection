@@ -14,4 +14,8 @@ public class FavoriteDAO {
 	public int insert(FavoriteDTO dto) {
 		return db.insert("Favorite.insert", dto);
 	}
+	
+	public int delete(FavoriteDTO dto) {
+		return db.delete("Favorite.delete", dto);
+	}
 }

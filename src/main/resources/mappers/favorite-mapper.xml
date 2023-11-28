@@ -7,4 +7,7 @@
 	<insert id="insert">
 		INSERT INTO favorite VALUES (null, #{mID}, #{eSeq})
 	</insert>
+	<delete id="delete">
+		DELETE FROM favorite WHERE mID = #{mID} and eseq = #{eSeq} 
+	</delete>
 </mapper>

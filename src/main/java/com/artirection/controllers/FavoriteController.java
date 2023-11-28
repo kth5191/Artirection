@@ -27,4 +27,14 @@ public class FavoriteController {
 		
 		return;
 	}
+	
+	//찜 목록에 삭제
+	@ResponseBody
+	@RequestMapping("delete")
+	public void deleteFavorite(int seq) {
+		String mID = (String) session.getAttribute("loginID");
+		service.delete(new FavoriteDTO(0, mID, seq));
+		
+		return;
+	}
 }
