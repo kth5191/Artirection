@@ -23,22 +23,12 @@
 
 <script src="/js/hangjungdong/hangjungdong.js"></script>
 </head>
-<style>
-/*지도 내부 인포윈도우*/
-.markContent{
-	width:100px;
-	border-radius:4px;
-	text-algin:center;
-}
-.markThumbnail{
-	width:50px; height:50px;
-}
-</style>
+
 <body>
 	<%@ include file="./commons/header.jsp" %>
 	<div class="container border">
 		<div class="contents" id="title">관람하기</div>
-		<div class="contents border" id="map">
+			<div class="contents border" id="map">
 		</div>
 		<nav class="navbar navbar-expand contents d-none d-lg-block">
 			<ul class="navbar-nav">
@@ -46,7 +36,6 @@
 				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
 				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
 				<li class="nav-item border" id="search-btn">
-<!-- 				<a class="nav-link text-white"></a> -->
 					<button class="nav-link text-white" id="search">검색</button>
 				</li>
 			</ul>
@@ -57,48 +46,15 @@
 				<li class="nav-item border"><select id="sido"><option value="">시/도 선택</option></select></li>
 				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
 				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
-				<li class="nav-item border" id="search-btn"><a class="nav-link text-white" href="#">검색</a></li>
+				<li class="nav-item border" id="search-btn">
+					<button class="text-white" id="search">검색</button>
+				</li>
 			</ul>
 		</nav>
 		
 		<div class="exhibition__content">
-		
+			<!-- 전시 내용 -->
 		</div>
-
-<!-- 		<div class="search-div contents border"> -->
-<!--             <div class="search__img"> -->
-<!--             	<img class="exhibition__img" src="http://www.culture.go.kr/upload/rdf/23/05/show_2023051813454323122.jpg"> -->
-<!--             </div> -->
-            
-<!-- 			<div class="exhibition__inner"> -->
-<!--                 <div class="exhibition__title "> -->
-<!--                 	[온라인 특별전] 막걸리, 거친 일상의 벗 -->
-<!--                 </div> -->
-<!--                 <div class="exhibition__contents "> -->
-<!--                     20231101~20231204 -->
-<!--                 </div> -->
-<!--                 <div class="exhibition__location"> -->
-<!--                     <div class="exhibition__area"> -->
-<!--                         서울 -->
-<!--                     </div> -->
-<!--                     <div class="exhibition__place"> -->
-<!--                         국립민속박물관 -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--                 <div class="exhibition__icon"> -->
-<!--                     <div class="icon2"> -->
-<!--                         <a href="/board/write"> -->
-<!--                         	<i class="bi bi-pencil-fill"></i> -->
-<!--                         </a> -->
-<!--                     </div> -->
-<!--                    <div class="icon1"> -->
-<!--                         <i class="bi bi-heart"></i> -->
-<!--                    </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!-- 		</div> -->
-		
-
 	</div>
 	 <%@ include file="./commons/footer.jsp" %>
 </body>
@@ -131,7 +87,7 @@
 	        lon = position.coords.longitude; // 경도
 
 	      var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-	        message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+	        message = '<div style="width: 160px; height: 50px; padding:15px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
 
 	      // 마커와 인포윈도우를 표시합니다
 	      displayMarker(locPosition, message);
@@ -202,6 +158,12 @@
 		var sidoIdx=hangjungdong.sido.findIndex(i=>i.sido==$("#sido").val());
 		var sigugunIdx=hangjungdong.sigugun.findIndex(i=>i.sigugun==$("#sigugun").val()&&i.sido==$("#sido").val());
 			
+		console.log(sidoIdx +" : "+sigugunIdx);
+		
+		if(sidoIdx==-1 || sigugunIdx == -1){
+			alert("지역을 선택해주세요.");
+			return;
+		}
 		
 		$.ajax({
 			url:"/api/selectByArea",
@@ -219,7 +181,18 @@
 			
 			var one;
 			var mapData=[];
+			$(".search-div").remove();
 			for(let temp=0;temp<resp.length;resp++){
+				
+				// 검색 결과가 없을 때
+				var totalCount = $(resp).find("msgBody").find("totalCount").text();
+				
+				if(totalCount == 0){
+					let exhibition__content = $(".exhibition__content");
+					let search_div = $("<div class='search-div contents border'>");
+						search_div.html("검색 결과가 없습니다.");
+					exhibition__content.append(search_div);
+				}
 				
 				$(resp).find("perforList").each(function(){
 					
@@ -230,9 +203,10 @@
 					var tmSeq = $(this).find("seq").text();
 					var tmStartDate = $(this).find("startDate").text();
 					var tmEndDate = $(this).find("endDate").text();
-					var tmArea = $(this).find("area").text();
+					var realmName = $(this).find("realmName").text();
 					var tmPlace = $(this).find("place").text();
 					
+					console.log("tmArea : "+$(this).find("area").text());
 					
 					one = [tmY,tmX,tmTitle,tmImg,tmSeq];
 					
@@ -241,6 +215,7 @@
 					
 					
 //			 		jquery
+					
 					let exhibition__content = $(".exhibition__content");
 
 					let search_div = $("<div class='search-div contents border'>");
@@ -262,7 +237,7 @@
 			                
 			                let exhibition__location = $("<div class='exhibition__location'>");
 			                    let exhibition__area = $("<div class='exhibition__area'>");
-			                        exhibition__area.html("서울");
+			                        exhibition__area.html(realmName);
 			                    let exhibition__place = $("<div class='exhibition__place'>");
 			                        exhibition__place.html(tmPlace);
 			                
@@ -292,14 +267,6 @@
 					
 					
 					
-					
-					
-					
-					
-					
-					
-					
-					
 				})
 				
 				
@@ -326,7 +293,7 @@
 	            
 	            
 	            // 인포 윈도우에 표시할 내용
-	            var iwContent = '<div class="markContent" style="padding:5px;"> <div><img class="markThumbnail" src='+data[3]+'></div>'+data[2]+'</div>'+'<div>'+data[4]+'</div>',
+	            var iwContent = '<div class="markContent" style="text-algin:center; width:200px; height:230px; padding:5px;"> <div><img class="markThumbnail" src='+data[3]+'></div><div>'+data[2]+'</div>'+'<div>'+data[4]+'</div></div>',
 	            	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시
 	            
 	            
