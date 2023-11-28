@@ -1,8 +1,3 @@
-$(".icon1").on("click", function() {
-	$(this).toggleClass("bi-heart bi-heart-fill");
-});
-
-
 jQuery(document).ready(function(){
   //sido option 추가
   jQuery.each(hangjungdong.sido, function(idx, code){
