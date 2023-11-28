@@ -18,65 +18,92 @@
 <!-- 폰트어썸 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="/css/commons/font.css">
 <link rel="stylesheet" href="/css/board/detail.css">
 <title>나의 기록</title>
 </head>
 <body>
 	<%@ include file="../commons/header.jsp"%>
 	<div class="container">
-		<div class="contentBox col-6 p-0 m-0">
-			<img src="img.png">
-		</div>
-
-		<div class="detailBox col-6">
-			<h2 class="detail">상세정보</h2>
-			<div class="infoBox row p-0 m-0">
-				<div class="myBox col-12">
-					<div class="idBox row">
-						<div class="id col-3 col-md-2">
-							<span>제목</span>
+		<div class="DetailContainer">
+			<div class="ImageBox col-6 p-0 m-0">
+				<img src="img.png">
+			</div>
+	
+			<div class="detailBox col-6">
+				<h2 class="title">전시회 제목</h2>
+				<div class="infoBox row p-0 m-0">
+					<div class="myBox col-12">
+						<div class="detailInfoBox periodBox row">
+							<div class="name col-3 col-md-2">
+								<div class="detailText">기간</div>
+							</div>
+							<div class="col-1 col-md-1">
+								<span>|</span>
+							</div>
+							<div class="period col-8 col-md-9">
+								<span>시작일 - 마감일</span>
+							</div>
 						</div>
-						<div class="col-1 col-md-1">
-							<span>|</span>
+						<div class="detailInfoBox placeBox row">
+							<div class="phone col-3 col-md-2">
+								<div class="detailText">장소</div>
+							</div>
+							<div class="col-1 col-md-1">
+								<span>|</span>
+							</div>
+							<div class="place col-8 col-md-9">
+								<span> 위치 </span>
+							</div>
 						</div>
-						<div class="userID col-8 col-md-9">
-							<span>Title</span>
+						<div class="detailInfoBox categoriBox row">
+							<div class="email col-3 col-md-2">
+								<div class="detailText">분류</div>
+							</div>
+							<div class="col-1 col-md-1">
+								<span>|</span>
+							</div>
+							<div class="categori col-8 col-md-9">
+								<span>공연</span>
+							</div>
 						</div>
-					</div>
-					<div class="nameBox row">
-						<div class="name col-3 col-md-2">
-							<span>날짜</span>
+						<div class="detailInfoBox priceBox row">
+							<div class="email col-3 col-md-2">
+								<div class="detailText">요금</div>
+							</div>
+							<div class="col-1 col-md-1">
+								<span>|</span>
+							</div>
+							<div class="price col-8 col-md-9">
+								<span>무료</span>
+							</div>
 						</div>
-						<div class="col-1 col-md-1">
-							<span>|</span>
-						</div>
-						<div class="userName col-8 col-md-9">
-							<span>시작일 - 마감일</span>
-						</div>
-					</div>
-					<div class="phoneBox row">
-						<div class="phone col-3 col-md-2">
-							<span>장소</span>
-						</div>
-						<div class="col-1 col-md-1">
-							<span>|</span>
-						</div>
-						<div class="userPhone col-8 col-md-9">
-							<span> 어디 </span>
-						</div>
-					</div>
-					<div class="emailBox row">
-						<div class="email col-3 col-md-2">
-							<span>분류</span>
-						</div>
-						<div class="col-1 col-md-1">
-							<span>|</span>
-						</div>
-						<div class="userEmail col-8 col-md-9">
-							<span>공연</span>
+						<div class="detailInfoBox officialBox row">
+							<div class="email col-3 col-md-2">
+								<div class="detailText">공식홈</div>
+							</div>
+							<div class="col-1 col-md-1">
+								<span>|</span>
+							</div>
+							<div class="official col-8 col-md-9">
+								<span>바로가기</span>
+							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		
+		<div class="reviewListBox col-12">
+			<div class="reviewBoxTitle">관람평</div>
+			<div class="reviewBox col-12">
+				<div class="userId row-12">유저 아이디</div>
+				<div class="contentBox">
+					<div class="userContent row-11">유저가 작성한 관람평</div>
+					<div class="userStar row-1">*****</div>
+				</div>
+				<div class="userWriteDate">2023-11-28</div>
 			</div>
 		</div>
 	</div>
