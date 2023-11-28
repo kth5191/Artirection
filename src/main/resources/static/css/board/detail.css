@@ -14,9 +14,11 @@
 .container{
     max-width: 1400px !important;
     min-width: 300px;
+    /* 화면 좌우로 배치하는 코드 */
     display: flex;
 	flex-direction: row; /* 기본값이지만 명시적으로 지정할 수 있습니다. */
 	justify-content: space-between; /* 요소들을 좌우로 최대한 분산 배치합니다. */
+	/**/
 	margin:40px 0 40px 0; 
 }
 
