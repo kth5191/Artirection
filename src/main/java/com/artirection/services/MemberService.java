@@ -47,4 +47,9 @@ public class MemberService {
 	public MemberDTO selectById(String id) {
 		return mdao.selectById(id);
 	}
+	
+	// 내정보 수정
+	public int updateById(MemberDTO dto) {
+		return mdao.updateById(dto);
+	}
 }

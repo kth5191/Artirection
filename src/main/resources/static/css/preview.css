@@ -1,6 +1,7 @@
 .container {
 	max-width: 1040px;
 	min-width: 300px;
+	width: 100%;
 	margin: auto;
 }
 
@@ -21,7 +22,10 @@
 	margin-top: 30px;
 	margin-bottom: 50px;
 }
-
+.navbar{
+	width: 100%;
+	margin-bottom: 50px;
+}
 .navbar-nav {
 	width: 100%;
 }
@@ -42,26 +46,37 @@
 	margin-bottom: 5px;
 }
 
-#search-btn {
+#search {
 	margin-right: 0px;
-
+	width: 100%; height: 100%;
+	border: none;
 	background-color: #778C86;
 }
 
-.search-div {
-	height: 160px;
+/* 전시회 이미지 */
+.exhibition__img{
+    width: 150px; height: 180px;
+    margin-right: 10px;
+}
 
+.search-div {
+    display: flex;
 	padding: 20px;
 
 	margin-bottom: 20px;
 }
 
-.search-title {
+.exhibition__inner{
+	padding: 10px;
+    width: 80%;
+}
+
+.exhibition__title {
 	width: 100%;
 	font-size: 20px;
 }
 
-.search-contents {
+.exhibition__contents {
 	width: 100%;
 
 	margin-top: 15px;
@@ -79,18 +94,29 @@
 
 }
 
-.search-location {
+.exhibition__location {
 	position: relative;
 	font-size: 15px;
 }
+/* 장소 */
+.exhibition__area,.exhibition__place{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
+/* 아이콘 */
+.exhibition__icon{
+    display: flex;
+    position: relative;
+}
 .icon1 {
-	position: absolute;
+    position: absolute;
 	right: 0px;
 }
 
 .icon2 {
-	position: absolute;
+
+    position: absolute;
 	right: 30px;
 }
 
@@ -98,9 +124,18 @@
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	color: blue;
 }
 
 i {
 	cursor: pointer;
+}
+
+/*지도 내부 인포윈도우*/
+/*.markContent{*/
+/*	width:100px;*/
+/*	border-radius:4px;*/
+/*	text-algin:center;*/
+/*}*/
+.markThumbnail{
+	width:100px; height:150px;
 }
