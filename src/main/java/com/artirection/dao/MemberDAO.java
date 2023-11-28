@@ -38,4 +38,9 @@ public class MemberDAO {
 	public MemberDTO selectById(String id) {
 		return db.selectOne("member.selectById", id);
 	}
+	
+	// 내정보 수정
+	public int updateById(MemberDTO dto) {
+		return db.update("member.updateById", dto);
+	}
 }
