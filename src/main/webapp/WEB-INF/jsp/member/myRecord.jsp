@@ -90,7 +90,7 @@
 			<h3 class="myrecord col-12">나의 기록</h3>
 		</div>
 
-
+		<!-- 내 리뷰 출력 -->
 		<c:forEach var="board" items="${boardList}">
 			<div class="contentBox row p-0 m-0">
 				<div class="imgBox col-5 col-sm-3 col-lg-2 p-0">
@@ -113,6 +113,7 @@
 								<div class="date col-7 col-md-10">
 									<span>전시날짜</span>
 								</div>
+								<!-- 별점 수만큼 색칠하여 출력 -->
 								<div class="star col-5 col-md-2" data-rating="${board.bGrade}">
 									<c:forEach var="i" begin="1" end="5">
 										<span data-value="${i}"> 
