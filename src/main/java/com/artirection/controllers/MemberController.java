@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -166,5 +167,16 @@ public class MemberController {
 		model.addAttribute("boardList", boardList);
 		
 		return "/member/myRecord";
+	}
+	
+	// 내정보 수정하기
+	@RequestMapping("updateById")
+	public String updateById(MemberDTO dto) {
+		String loginID = (String) session.getAttribute("loginID");
+		dto.setmID(loginID);
+		
+		mservice.updateById(dto);
+		
+		return "redirect:/member/myRecord";
 	}
 }

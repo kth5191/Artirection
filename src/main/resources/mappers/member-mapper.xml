@@ -29,4 +29,8 @@
 		SELECT * FROM members WHERE mID = #{id};
 	</select>
 
+	<!-- 내정보 수정 -->
+	<update id="updateById">
+		UPDATE members SET name=#{name}, email=#{email}, phone=#{phone} WHERE mID = #{mID}
+	</update>
 </mapper>
