@@ -1,16 +1,3 @@
-
-@font-face {
-    font-family: 'JeonjuCraftGoR';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/JeonjuCraftGoR.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-*{
-    box-sizing: border-box;
-    font-family: 'JeonjuCraftGoR';
-    
-}
 .container{
     max-width: 1400px !important;
     min-width: 300px;
@@ -19,83 +6,32 @@
 	flex-direction: row; /* 기본값이지만 명시적으로 지정할 수 있습니다. */
 	justify-content: space-between; /* 요소들을 좌우로 최대한 분산 배치합니다. */
 	/**/
-	margin:40px 0 40px 0; 
+	padding:40px 0px 40px 20px !important; 
 }
 
-.myInfo{
-    font-weight: bold;
-}
-
-.myInfoBox{
-    margin-bottom: 10px;
-}
-
-.infoBox{
-    width: 100%;
+.ImageBox{
+    height: 100%;
     border: 1px solid black;
 }
 
+.detailBox {
+	padding-left: 50px;
+}
 
-.idBox,.nameBox,.phoneBox,.emailBox{
+.title {
+	font-size: 30px;
+	margin-bottom: 20px;
+}
+
+.infoBox div {
+	font-size: 16px;
+}
+
+.detailInfoBox {
+    display: flex;
+    height: 100px;
     font-size: 15px;
     font-weight: bold;
-    display: flex;
-    margin: 30px;
-}
-
-.updateBtnBox{
-    margin-bottom: 30px;
-}
-
-.updateBtn{
-    color: #274A40;
-    font-size: 15px;
-    width: 100px;
-    height: 27px;
-    border: none;
-    background-color: white;
-}
-
-
-
-.contentBox{
-    width: 100%;
-    height: 200px;
-    display: flex;
-    margin-bottom: 10px;
-    border: 1px solid black;
-}
-
-.myrecord{
-    font-weight:bold;
-}
-
-.myrecordBox{
-    margin-top: 150px;
-    margin-bottom: 10px;
-}
-
-.contentBox .imgBox{
-    width: 15%;
-    display: flex; align-items: center; justify-content: center;
-}
-
-.contentBox .descBox{
-    /* height: 100%; */
-    width: 900px;
-}
-
-.titleBox,.placeBox{
-    height: 33%;
-    width: 100%;
-}
-
-.place{
-    margin-top: 10px;
-}
-
-.titleBox{
-    display: flex;
     align-items: center;
 }
 
