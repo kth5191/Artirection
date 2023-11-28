@@ -1,5 +1,7 @@
 package com.artirection.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artirection.dto.BoardDTO;
 import com.artirection.dto.MemberDTO;
+import com.artirection.services.BoardService;
 import com.artirection.services.EmailService;
 import com.artirection.services.MemberService;
 
@@ -24,6 +28,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mservice;
+	
+	@Autowired
+	private BoardService bservice;
 	
 	@Autowired
 	private EmailService EmailService;
@@ -151,8 +158,12 @@ public class MemberController {
 		String loginID = (String) session.getAttribute("loginID");
 		
 		MemberDTO dto = mservice.selectById(loginID);
+		List<BoardDTO> boardList = bservice.selectById(loginID);
+		
+		System.out.println(boardList.size());
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("boardList", boardList);
 		
 		return "/member/myRecord";
 	}

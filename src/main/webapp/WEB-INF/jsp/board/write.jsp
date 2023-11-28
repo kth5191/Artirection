@@ -54,8 +54,8 @@
 				</div>
 
 				<div class="writeBox">
-					<a href=""> <input class="writebtn" type="button" value="목록으로">
-					</a> <input class="writebtn" type="submit" value="작성하기">
+					<a href="/member/myRecord"> <input class="writebtn" type="button" value="목록으로"></a> 
+					<input class="writebtn" type="submit" value="작성하기">
 				</div>
 			</form>
 		</div>

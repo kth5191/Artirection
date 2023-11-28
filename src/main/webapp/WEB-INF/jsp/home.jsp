@@ -39,15 +39,7 @@
         <div id="monthTitle" class="colorBlack">이 달의 전시</div>
         <div id="monthExhibition" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/assets/Kirby1.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="/assets/Kirby2.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="/assets/Kirby3.jpg" class="d-block w-100" alt="...">
-                </div>
+                
             </div>
         </div>
     </div>
@@ -89,6 +81,14 @@
 				
 				one = [tmY,tmX,tmTitle,tmImg];
 				
+				var imgDiv = $("<div class='carousel-item'>");
+                var img = $("<img src='' class='d-block w-100'>");
+                img.attr("src", tmImg);
+                
+                imgDiv.append(img);
+                
+                $(".carousel-inner").append(imgDiv);
+				
 				console.log(one);
 				mapData.push(one);
 			})
@@ -96,6 +96,7 @@
 		}
 		
 		console.log(mapData);
+		$(".carousel-inner").children().first().addClass("active");
 
 
 		// 인포윈도우 배열

@@ -19,12 +19,12 @@ public class BoardController {
 	private HttpSession session;
 	@Autowired
 	private BoardService service;
-	
+	// 글 작성 페이지
 	@RequestMapping("write")
 	public String write() {
 		return "/board/write";
 	}
-	
+	// 글 작성하기
 	@RequestMapping("writeProc")
 	public String writeProc(BoardDTO dto) throws Exception {
 		String writer = (String) session.getAttribute("loginID");
@@ -34,9 +34,14 @@ public class BoardController {
 		
 		return "redirect:/";
 	}
-	
+	// 찜한목록 이동
 	@RequestMapping("favorite")
 	public String favorite() {
 		return "/board/favorite";
+	}
+	// 상세페이지 이동
+	@RequestMapping("detail")
+	public String detail() {
+		return "/board/detail";
 	}
 }

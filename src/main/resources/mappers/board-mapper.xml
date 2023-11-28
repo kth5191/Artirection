@@ -6,4 +6,7 @@
 	<insert id="insert">
 		INSERT INTO board VALUES (null, 0, #{bID}, #{bTitle}, #{bContents}, #{bGrade}, now())
 	</insert>
+	<select id="selectById" resultType="com.artirection.dto.BoardDTO">
+		SELECT * FROM board WHERE bID = #{id}
+	</select>
 </mapper>
