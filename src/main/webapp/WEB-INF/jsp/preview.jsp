@@ -229,7 +229,8 @@
 			            
 			            let exhibition__inner = $("<div class='exhibition__inner'>");
 
-			                let exhibition__title = $("<div class='exhibition__title'>");
+			            	// 디테일 페이지로 이동
+			                let exhibition__title = $("<a href=/board/detail?seq="+tmSeq+"><div class='exhibition__title'>");
 			                    exhibition__title.html(tmTitle);
 
 			                let exhibition__contents = $("<div class='exhibition__contents'>");
@@ -240,8 +241,10 @@
 			                        exhibition__area.html(realmName);
 			                    let exhibition__place = $("<div class='exhibition__place'>");
 			                        exhibition__place.html(tmPlace);
+			                    let exhibition__seq = $("<div>");
+			                    	exhibition__seq.html(tmSeq);
 			                
-			                exhibition__location.append(exhibition__area).append(exhibition__place);
+			                exhibition__location.append(exhibition__area).append(exhibition__place).append(exhibition__seq);
 
 			                let exhibition__icon = $("<div class='exhibition__icon'>");
 			                    let iconWrite = $("<div class='icon2'>");
