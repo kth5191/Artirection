@@ -51,7 +51,7 @@ $(document).ready(function () {
 
 	    	var tmTitle = $(resp).find("title").text();
 	    	var tmImgUrl = $(resp).find("imgUrl").text();
-	    	var tmSeq = $(resp).find("seq").text();
+	    	var tmSeq = $(resp).find("seq").first().text();
 	    	var tmStartDate = $(resp).find("startDate").text();
 	    	var tmEndDate = $(resp).find("endDate").text();
 	    	var realmName = $(resp).find("realmName").text();
@@ -69,6 +69,7 @@ $(document).ready(function () {
 		      let exhibition__inner = $("<div class='exhibition__inner'>");
 	
 		      // 디테일 페이지로 이동
+		      console.log(tmSeq);
 		      let exhibition__title = $("<a href=/board/detail?seq=" + tmSeq + "><div class='exhibition__title'>");
 		      exhibition__title.html(tmTitle);
 	
