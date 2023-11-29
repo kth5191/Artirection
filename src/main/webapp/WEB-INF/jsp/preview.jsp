@@ -30,23 +30,23 @@
 		<div class="contents" id="title">관람하기</div>
 			<div class="contents border" id="map">
 		</div>
-		<nav class="navbar navbar-expand contents d-none d-lg-block">
+		<nav class="content__navbar navbar-expand contents d-none d-lg-block">
 			<ul class="navbar-nav">
-				<li class="nav-item border"><select id="sido"><option value="">시/도 선택</option></select></li>
-				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
-				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
-				<li class="nav-item border" id="search-btn">
+				<li class="nav__inner border"><select id="sido"><option value="">시/도 선택</option></select></li>
+				<li class="nav__inner border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
+				<li class="nav__inner border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
+				<li class="nav__inner border" id="search-btn">
 					<button class="nav-link text-white" id="search">검색</button>
 				</li>
 			</ul>
 		</nav>
 
-		<nav id="small-navbar" class="navbar contents d-block d-lg-none">
+		<nav id="small-navbar" class="content__navbar contents d-block d-lg-none">
 			<ul class="navbar-nav">
-				<li class="nav-item border"><select id="sido"><option value="">시/도 선택</option></select></li>
-				<li class="nav-item border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
-				<li class="nav-item border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
-				<li class="nav-item border" id="search-btn">
+				<li class="nav__inner border"><select id="sido"><option value="">시/도 선택</option></select></li>
+				<li class="nav__inner border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
+				<li class="nav__inner border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
+				<li class="nav__inner border" id="search-btn">
 					<button class="text-white" id="search">검색</button>
 				</li>
 			</ul>

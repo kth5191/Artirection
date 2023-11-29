@@ -22,15 +22,14 @@
 	margin-top: 30px;
 	margin-bottom: 50px;
 }
-.navbar{
-	width: 100%;
+.content__navbar{
 	margin-bottom: 50px;
 }
 .navbar-nav {
 	width: 100%;
 }
 
-.nav-item {
+.nav__inner {
 	width: 25%;
 	height: 50px;
 
@@ -41,7 +40,13 @@
 	font-size: 18px;
 }
 
-#small-navbar .nav-item {
+.nav__inner select{
+	width: 100%;
+	height: 100%;
+}
+
+
+#small-navbar>.nav__inner{
 	width: 100%;
 	margin-bottom: 5px;
 }
