@@ -29,37 +29,86 @@
 			<h3 class="favoriteBox col-12">찜한 목록</h3>
 		</div>
 
-		<div class="contentBox row p-0 m-0">
-			<div class="imgBox col-4 col-sm-5 col-lg-2 p-0">
-				<img src="img.png">
-			</div>
-			<div class="descBox col-8 col-sm-7 col-lg-10 p-0">
-				<div class="row h-100">
-					<div class="titleBox col-12">
-						<div class="title">
-							<span><h4 style="margin: 0;">전시회 1</h4></span>
-						</div>
-					</div>
-					<div class="deBox col-10">
-						<div class="de">
-							<span style="font-size: 15px;"> 전시회 설명합니다. 길게 써야하는데 뭘 써야할지 잘 모르겠어요. 저는 요시다 유니 전시회 가보고 싶어요. 파이팅전시회 설명합니다. 길게 써야하는데 뭘 써야할지 잘 모르겠어요. 저는 요시다 유니 전시회 가보고 싶어요. 파이팅 </span>
-						</div>
-					</div>
-					<div class="placeBox col-12">
-						<div class="row g-0">
-							<div class="place col-10 col-md-11">
-								<span>전시장소</span>
-							</div>
-							<div class="heart col-2 col-md-1">
-								<i class="fa-regular fa-heart fa-xl"></i>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
+		<div class="exhibition__content">
 		</div>
 	</div>
 	<%@ include file="../commons/footer.jsp"%>
 </body>
+<script>
+$(document).ready(function () {
+	  var seqList = ${ seqList }; // JSP로부터 받은 배열
+
+	  seqList.forEach(function (seq, index) {
+	  
+	    $.ajax({
+	      url: "/api/selectByDetail",
+	      data: {
+	        seq: seq
+	      }
+	    }).done(function (resp) {
+	    	
+	    	console.log(resp);
+
+	    	var tmTitle = $(resp).find("title").text();
+	    	var tmImgUrl = $(resp).find("imgUrl").text();
+	    	var tmSeq = $(resp).find("seq").first().text();
+	    	var tmStartDate = $(resp).find("startDate").text();
+	    	var tmEndDate = $(resp).find("endDate").text();
+	    	var realmName = $(resp).find("realmName").text();
+	    	var tmPlace = $(resp).find("place").text();
+	
+		      let exhibition__content = $(".exhibition__content");
+	
+		      let search_div = $("<div class='search-div contents border'>");
+	
+		      let img_div = $("<div class='search__img'>");
+		      let img = $("<img class='exhibition__img'> ");
+		      img.attr("src", tmImgUrl);
+		      img_div.append(img);
+	
+		      let exhibition__inner = $("<div class='exhibition__inner'>");
+	
+		      // 디테일 페이지로 이동
+		      console.log(tmSeq);
+		      let exhibition__title = $("<a href=/board/detail?seq=" + tmSeq + "><div class='exhibition__title'>");
+		      exhibition__title.html(tmTitle);
+	
+		      let exhibition__contents = $("<div class='exhibition__contents'>");
+		      exhibition__contents.html(tmStartDate + " ~ " + tmEndDate);
+	
+		      let exhibition__location = $("<div class='exhibition__location'>");
+		      let exhibition__area = $("<div class='exhibition__area'>");
+		      exhibition__area.html(realmName);
+		      let exhibition__place = $("<div class='exhibition__place'>");
+		      exhibition__place.html(tmPlace);
+		      let exhibition__seq = $("<div>");
+		      exhibition__seq.html(tmSeq);
+	
+		      exhibition__location.append(exhibition__area).append(exhibition__place).append(exhibition__seq);
+	
+		      let exhibition__icon = $("<div class='exhibition__icon'>");
+		      let iconWrite = $("<div class='icon2'>");
+		      let iconWriteATag = $("<a href='/board/write'>");
+		      let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
+		      iconWriteATag.append(icontWriteIcon);
+		      iconWrite.append(iconWriteATag);
+	
+		      let iconHeart = $("<div>");
+		      iconHeart.attr("id", tmSeq);
+		      let iconHeartIcon = $("<i class='icon1 bi bi-heart'></i>");
+		      iconHeart.append(iconHeartIcon);
+	
+		      exhibition__icon.append(iconWrite).append(iconHeart);
+	
+		      exhibition__inner.append(exhibition__title).append(exhibition__contents).append(exhibition__location).append(exhibition__icon);
+	
+		      search_div.append(img_div).append(exhibition__inner);
+	
+		      exhibition__content.append(search_div);
+
+	    });
+
+	  });
+	});
+</script>
 </html>
