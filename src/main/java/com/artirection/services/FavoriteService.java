@@ -1,5 +1,7 @@
 package com.artirection.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,9 @@ public class FavoriteService {
 	
 	public int delete(FavoriteDTO dto) {
 		return fdao.delete(dto);
+	}
+	
+	public List<String> selectById(String id) {
+		return fdao.selectById(id);
 	}
 }
