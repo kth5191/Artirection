@@ -60,16 +60,22 @@ public class ApiContorller {
 	// 지역별 공연/전시 목록 조회
 	@ResponseBody
 	@RequestMapping(value="selectByArea", method=RequestMethod.GET, produces="application/text;charset=utf8")
-	public String rtSelectByArea(String sido,String sigungu, Model model) throws IOException{
+	public String rtSelectByArea(String sido,String sigungu,String keyword, Model model) throws IOException{
 		
 		System.out.println("시도 : "+sido);
 		System.out.println("시군구 : "+sigungu);
-		
+		System.out.println("키워드 : "+keyword);
 		
 	      StringBuilder urlBuilder = new StringBuilder("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/area"); /*URL*/
 	        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=WTN3HpCtoUbvSxoTg3w7og3Y2piCph2NEpXjiv9QSHsVyTp1ezvYXUPvm4ntMkEIiub%2FLGlzFzf7NpLn2I5cow%3D%3D"); /*Service Key*/
 	        urlBuilder.append("&" + URLEncoder.encode("sido","UTF-8") + "=" + URLEncoder.encode(sido, "UTF-8")); /*시도*/
 	        urlBuilder.append("&" + URLEncoder.encode("gugun","UTF-8") + "=" + URLEncoder.encode(sigungu, "UTF-8")); /*군구*/
+	        
+	        
+	        if(!keyword.equals("전체")) {
+	        	urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8") + "=" + URLEncoder.encode(keyword, "UTF-8"));
+	        }
+	        
 	        urlBuilder.append("&" + URLEncoder.encode("rows","UTF-8") + "=" + URLEncoder.encode("100", "UTF-8")); /**/
 	        
 	        URL url = new URL(urlBuilder.toString());
