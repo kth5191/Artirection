@@ -39,8 +39,8 @@ public class HomeController {
 	// 추천 전시회 출력
 	@Transactional
 	@ResponseBody
-	@RequestMapping("/recommandList")
-	public String recommandList(Model model) throws Exception {
+	@RequestMapping("/recommendList")
+	public String recommendList(Model model) throws Exception {
 		String loginID = (String) session.getAttribute("loginID");
 		
 		System.out.println("controller 들어옴");

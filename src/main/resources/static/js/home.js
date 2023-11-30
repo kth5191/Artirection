@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	
 	$.ajax({
-		url: "/recommandList"
+		url: "/recommendList"
 	}).done(function(resp){
 		console.log("분류 : " + resp.length);
 		
@@ -13,7 +13,7 @@ $(document).ready(function() {
 				var image = $(this).find("thumbnail").text();
 				
 				let rItemDiv = $("<div>");
-				rItemDiv.addClass("recommandItem col-12 col-md-6 col-xl-3");
+				rItemDiv.addClass("recommendItem col-12 col-md-6 col-xl-3");
 				
 				let rItemImgDiv = $("<div>");
 				rItemImgDiv.addClass("itemImgBox");
@@ -32,7 +32,7 @@ $(document).ready(function() {
 				rItemTitleDiv.html(title);
 				
 				rItemDiv.append(rItemImgDiv).append(rItemTitleDiv);
-				$(".recommandBox").append(rItemDiv);
+				$(".recommendBox").append(rItemDiv);
 			})
 	})
 	

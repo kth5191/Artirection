@@ -39,17 +39,17 @@
 
 /* 전시회 추천 */
 
-#recommandTitle {
+#recommendTitle {
     margin-top: 150px;
     margin-bottom: 30px;
     font-size: 35px;
 }
 
-.recommandBox {
+.recommendBox {
 	width: 100%;
 }
 
-.recommandItem {
+.recommendItem {
 	text-align: center;
 	height: 350px;
 	margin: 0 0 100px 0;

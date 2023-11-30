@@ -36,26 +36,8 @@
             </div>
         </div>
 
-        <div id="recommandTitle" class="colorBlack">이런 전시를 좋아하실 것 같아요!</div>
-        <div class="recommandBox row">
-        	<!-- <div class="recommandItem col-12 col-md-6 col-xl-3">
-        		<div class="itemImg">
-        			<img src="#" class="img-fluid"></img>
-        		</div>
-        		<div class="itemTitle">전시회1</div>
-        	</div>
-        	<div class="recommandItem col-12 col-md-6 col-xl-3">
-        		<div class="itemImg"></div>
-        		<div class="itemTitle">전시회2</div>
-        	</div>
-        	<div class="recommandItem col-12 col-md-6 col-xl-3">
-        		<div class="itemImg"></div>
-        		<div class="itemTitle">전시회3</div>
-        	</div>
-        	<div class="recommandItem col-12 col-md-6 col-xl-3">
-        		<div class="itemImg"></div>
-        		<div class="itemTitle">전시회4</div>
-        	</div> -->
+        <div id="recommendTitle" class="colorBlack">이런 전시를 좋아하실 것 같아요!</div>
+        <div class="recommendBox row">
         </div>
     </div>
     
