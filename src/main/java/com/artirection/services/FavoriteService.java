@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.artirection.dao.FavoriteDAO;
+import com.artirection.dto.CategoryCountDTO;
 import com.artirection.dto.FavoriteDTO;
 
 @Service
@@ -28,5 +29,9 @@ public class FavoriteService {
 	// 빈도수 높은 찜 분류 가져오기
 	public String selectCategoryById(String loginID) {
 		return fdao.selectCategoryById(loginID);
+	}
+	
+	public List<CategoryCountDTO> getCategoryById(String id) {
+		return fdao.getCategoryById(id);
 	}
 }

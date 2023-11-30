@@ -14,4 +14,11 @@
 	<select id="selectBySeq" resultType="com.artirection.dto.BoardDTO">
 		SELECT * FROM board WHERE eSeq = #{seq}
 	</select>
+	
+	<select id="getCategoryById" resultType="com.artirection.dto.CategoryCountDTO">
+		SELECT category, COUNT(*) AS categoryCount
+		FROM board
+		WHERE bID = #{id}
+		GROUP BY category;
+	</select>
 </mapper>

@@ -17,4 +17,11 @@
 	<select id="selectCategoryById" resultType="String">
 		SELECT category FROM favorite GROUP BY category ORDER BY COUNT(*) DESC LIMIT 1
 	</select>
+	
+	<select id="getCategoryById" resultType="com.artirection.dto.CategoryCountDTO">
+		SELECT category, COUNT(category) AS categoryCount
+		FROM favorite
+		where mID = #{mID}
+		GROUP BY category;
+	</select>
 </mapper>
