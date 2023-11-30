@@ -13,13 +13,14 @@
 
 <!-- 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <!-- 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- 폰트어썸 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/member/myRecord.css">
+<!-- Chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <title>나의 기록</title>
 <style>
 .infoInput, .update2_div {
@@ -103,6 +104,30 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 				</div>
 			</div>
 		</form>
+		
+		
+		<div hidden>
+		<c:forEach var="categoryCount" items="${favoriteCount}">
+			<div class="favoriteLabels">
+				${categoryCount.category }
+			</div>
+			<div class="favoriteData">
+				${categoryCount.categoryCount }
+			</div>
+		</c:forEach>
+		
+		<c:forEach var="categoryCount" items="${boardCount}">
+			<div class="boardLabels">
+				${categoryCount.category }
+			</div>
+			<div class="boardData">
+				${categoryCount.categoryCount }
+			</div>
+		</c:forEach>
+		</div>
+		<h4>통계</h4>
+		<canvas id="favoriteChart" width="200px" height="200px"></canvas>
+		<canvas id="boardChart" width="200px" height="200px"></canvas>
 
 		<div class="myrecordBox">
 			<h3 class="myrecord col-12">나의 기록</h3>
@@ -230,6 +255,114 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 					var date = targetDiv.querySelector('.date span');
 					date.textContent = tmStartDate + "-" + tmEndDate;
 		});
+		}
+	});
+	
+	// 찜 목록 차트 그리기
+	var ctx = document.getElementById('favoriteChart');
+	var labels = [];
+	var data = [];
+
+	var labelsDivs = document.querySelectorAll('.favoriteLabels');
+	var dataDivs = document.querySelectorAll('.favoriteData');
+
+	labelsDivs.forEach(function(div) {
+	    labels.push(div.textContent.trim()); // labels 배열에 labels 클래스를 가진 div의 내용을 순서대로 추가
+	});
+
+	dataDivs.forEach(function(div) {
+	    data.push(div.textContent.trim()); // data 배열에 data 클래스를 가진 div의 내용을 순서대로 추가
+	});
+	
+	var myChart = new Chart(ctx, {
+		type: 'doughnut',
+		data: {
+			labels: labels,
+			datasets: [{
+				label: '#찜한 횟수',
+				data: data,
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 2
+			}]
+		},
+		options: {
+			responsive: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			},
+		}
+	});
+	
+	// 리뷰 목록 차트 그리기
+	var ctx = document.getElementById('boardChart');
+	var labels = [];
+	var data = [];
+
+	var labelsDivs = document.querySelectorAll('.boardLabels');
+	var dataDivs = document.querySelectorAll('.boardData');
+
+	labelsDivs.forEach(function(div) {
+	    labels.push(div.textContent.trim()); // labels 배열에 labels 클래스를 가진 div의 내용을 순서대로 추가
+	});
+
+	dataDivs.forEach(function(div) {
+	    data.push(div.textContent.trim()); // data 배열에 data 클래스를 가진 div의 내용을 순서대로 추가
+	});
+	
+	var myChart = new Chart(ctx, {
+		type: 'doughnut',
+		data: {
+			labels: labels,
+			datasets: [{
+				label: '#찜한 횟수',
+				data: data,
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+				borderColor: [
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 2
+			}]
+		},
+		options: {
+			responsive: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			},
 		}
 	});
 	</script>

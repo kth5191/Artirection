@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.artirection.dto.BoardDTO;
+import com.artirection.dto.CategoryCountDTO;
 import com.artirection.dto.MemberDTO;
 import com.artirection.services.BoardService;
 import com.artirection.services.EmailService;
+import com.artirection.services.FavoriteService;
 import com.artirection.services.MemberService;
 
 import commons.EncryptionUtils;
@@ -32,6 +34,9 @@ public class MemberController {
 	
 	@Autowired
 	private BoardService bservice;
+	
+	@Autowired
+	private FavoriteService fservice;
 	
 	@Autowired
 	private EmailService EmailService;
@@ -160,11 +165,13 @@ public class MemberController {
 		
 		MemberDTO dto = mservice.selectById(loginID);
 		List<BoardDTO> boardList = bservice.selectById(loginID);
-		
-		System.out.println(boardList.size());
+		List<CategoryCountDTO> favoriteCount = fservice.getCategoryById(loginID);
+		List<CategoryCountDTO> boardCount = bservice.getCategoryById(loginID);
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("favoriteCount",favoriteCount);
+		model.addAttribute("boardCount",boardCount);
 		
 		return "/member/myRecord";
 	}

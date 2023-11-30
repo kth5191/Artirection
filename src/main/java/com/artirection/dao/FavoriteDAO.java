@@ -1,11 +1,13 @@
 package com.artirection.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.artirection.dto.CategoryCountDTO;
 import com.artirection.dto.FavoriteDTO;
 
 @Repository
@@ -28,5 +30,10 @@ public class FavoriteDAO {
 	// 빈도수 높은 찜 분류 가져오기
 	public String selectCategoryById(String id) {
 		return db.selectOne("Favorite.selectCategoryById", id);
+	}
+	
+	// 찜의 분류와 숫자 가져오기
+	public List<CategoryCountDTO> getCategoryById(String id) {
+		return db.selectList("Favorite.getCategoryById", id);
 	}
 }
