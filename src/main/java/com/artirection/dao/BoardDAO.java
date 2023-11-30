@@ -29,4 +29,8 @@ public class BoardDAO {
 	public List<CategoryCountDTO> getCategoryById(String id) {
 		return db.selectList("Board.getCategoryById", id);
 	}
+	
+	public BoardDTO selectBybSeq(String bSeq) {
+		return db.selectOne("Board.selectBybSeq", bSeq);
+	}
 }
