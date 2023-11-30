@@ -17,6 +17,8 @@
 <!-- 폰트어썸 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 <link rel="stylesheet" href="/css/board/favorite.css">
 
 <title>찜한 목록</title>
@@ -75,7 +77,7 @@ $(document).ready(function () {
 	
 		      // 디테일 페이지로 이동
 		      console.log(tmSeq);
-		      let exhibition__title = $("<a href=/board/detail?seq=" + tmSeq + "><div class='exhibition__title'>");
+		      let exhibition__title = $("<a class='exhibition__title' href=/board/detail?seq=" + tmSeq + ">");
 		      exhibition__title.html(tmTitle);
 	
 		      let exhibition__contents = $("<div class='exhibition__contents'>");
@@ -86,24 +88,24 @@ $(document).ready(function () {
 		      exhibition__area.html(realmName);
 		      let exhibition__place = $("<div class='exhibition__place'>");
 		      exhibition__place.html(tmPlace);
-		      let exhibition__seq = $("<div>");
+		      let exhibition__seq = $("<div hidden>");
 		      exhibition__seq.html(tmSeq);
 	
 		      exhibition__location.append(exhibition__area).append(exhibition__place).append(exhibition__seq);
 	
 		      let exhibition__icon = $("<div class='exhibition__icon'>");
-		      let iconWrite = $("<div class='icon2'>");
-		      let iconWriteATag = $("<a href='/board/write'>");
-		      let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
-		      iconWriteATag.append(icontWriteIcon);
-		      iconWrite.append(iconWriteATag);
-	
-		      let iconHeart = $("<div>");
-		      iconHeart.attr("id", tmSeq);
-		      let iconHeartIcon = $("<i class='icon1 bi bi-heart'></i>");
-		      iconHeart.append(iconHeartIcon);
-	
-		      exhibition__icon.append(iconWrite).append(iconHeart);
+              let iconWrite = $("<div class='icon2'>");
+              let iconWriteATag = $("<a>").attr("href", '/board/write?eSeq=' + tmSeq+"&category="+realmName);
+              let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
+              iconWriteATag.append(icontWriteIcon);
+              iconWrite.append(iconWriteATag);
+
+              let iconHeart = $("<div>");
+              iconHeart.attr("id", tmSeq);
+              let iconHeartIcon = $("<i class='icon1 bi bi-heart'></i>");
+              iconHeart.append(iconHeartIcon);
+
+          exhibition__icon.append(iconWrite).append(iconHeart);
 	
 		      exhibition__inner.append(exhibition__title).append(exhibition__contents).append(exhibition__location).append(exhibition__icon);
 	
