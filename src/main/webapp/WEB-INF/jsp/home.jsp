@@ -36,7 +36,14 @@
             </div>
         </div>
 
-        <div id="recommendTitle" class="colorBlack">이런 전시를 좋아하실 것 같아요!</div>
+		<c:choose>
+			<c:when test="${loginID eq null }">
+				<div id="recommendTitle" class="colorBlack">이런 전시를 좋아하실 것 같아요!</div>
+			</c:when>
+			<c:otherwise>
+				<div id="recommendTitle" class="colorBlack">${loginID } 님이 좋아하실 것 같아요!</div>
+			</c:otherwise>
+		</c:choose>
         <div class="recommendBox row">
         </div>
     </div>
