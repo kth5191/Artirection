@@ -3,9 +3,7 @@ $(document).ready(function() {
 	$.ajax({
 		url: "/recommendList"
 	}).done(function(resp){
-		console.log("분류 : " + resp.length);
-		
-			
+
 			$(resp).find("perforList").each(function(){
 				
 				var seq = $(this).find("seq").text();

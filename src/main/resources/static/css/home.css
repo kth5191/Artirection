@@ -27,13 +27,18 @@
 
 
 /*지도 내부 인포윈도우*/
-.markContent{
-	width:100px;
+.customOverlayContent{
+	width:auto;
+	border: 1px solid #7d7d7d60;
 	border-radius:4px;
-	text-algin:center;
+	font-size: 14px;
+	text-align:center;
+	background-color: #ffffff;
 }
-.markThumbnail{
-	width:50px; height:50px;
+.customOverlayThumbnail{
+	width:120px;
+	height:auto;
+	margin-bottom: 5px;
 }
 
 
