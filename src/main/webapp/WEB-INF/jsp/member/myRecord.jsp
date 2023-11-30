@@ -35,6 +35,13 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .myBox {
 	padding: 30px;
 }
+canvas {
+	display: inline-block !important;
+}
+
+#chartTitle {
+	margin-top: 40px;
+}
 </style>
 </head>
 <body>
@@ -125,10 +132,11 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 			</div>
 		</c:forEach>
 		</div>
-		<h4>통계</h4>
-		<canvas id="favoriteChart" width="200px" height="200px"></canvas>
-		<canvas id="boardChart" width="200px" height="200px"></canvas>
-
+		<h3 id="chartTitle" class="myrecord col-12">통계</h4>
+		<div id="chartDiv" class="col-12" align="center">
+			<canvas id="favoriteChart" width="200px" height="200px"></canvas>
+			<canvas id="boardChart" width="200px" height="200px"></canvas>
+		</div>
 		<div class="myrecordBox">
 			<h3 class="myrecord col-12">나의 기록</h3>
 		</div>
@@ -143,7 +151,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 					<div class="row h-100">
 						<div class="titleBox col-12">
 							<div class="title">
-								<span><h4 style="margin: 0;">전시회1</h4></span>
+								<span><a href="/board/view?bSeq=${board.bSeq }"><h4 style="margin: 0;">전시회1</h4></a></span>
 							</div>
 						</div>
 						<div class="placeBox col-12">
@@ -309,6 +317,12 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 					}
 				}]
 			},
+			plugins: {
+			      title: {
+			        display: true,
+			        text: '찜한 목록 통계'
+			      }
+			    }
 		}
 	});
 	
@@ -363,6 +377,12 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 					}
 				}]
 			},
+			plugins: {
+			      title: {
+			        display: true,
+			        text: '내 리뷰 통계'
+			      }
+			    }
 		}
 	});
 	</script>

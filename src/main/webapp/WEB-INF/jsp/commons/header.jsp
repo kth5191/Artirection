@@ -30,10 +30,10 @@
                     <div class="collapse navbar-collapse w-100 g-0 m-0" id="navbarNavDropdown">
                         <ul class="navbar-nav row g-0 w-100">
                             
-                            <li class="nav-item col-4 text-center">
+                            <li class="nav-item col-3 text-center">
                                 <a class="nav-link colorWhite" href="/preview"> 관람하기 </a>
                             </li>
-                            <li class="nav-item col-4 text-center">
+                            <li class="nav-item col-3 text-center">
                                 <a class="nav-link colorWhite" href="/board/favorite"> 찜한 목록 </a>
                             </li>
                             <c:choose>
@@ -43,8 +43,11 @@
                                    	</li>
                                 </c:when>
                                 <c:otherwise>
-                                	<li class="nav-item col-4 text-center">
+                                	<li class="nav-item col-3 text-center">
                                 		<a class="nav-link colorWhite" href="/member/myRecord"> 마이페이지 </a>
+                            		</li>
+                            		<li class="nav-item col-3 text-center">
+                                		<a class="nav-link colorWhite" href="/member/logout"> 로그아웃 </a>
                             		</li>
                                 </c:otherwise>
                             </c:choose>

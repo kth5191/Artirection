@@ -69,5 +69,13 @@ public class BoardController {
 		
 		return "/board/detail";
 	}
-	
+	// 작성 글 보기
+	@RequestMapping("view")
+	public String goView(String bSeq, Model model) {
+		BoardDTO board = service.selectByBSeq(bSeq);
+		
+		model.addAttribute("board", board);
+		
+		return "/board/view";
+	}
 }
