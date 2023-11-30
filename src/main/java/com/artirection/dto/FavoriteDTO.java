@@ -1,39 +1,46 @@
 package com.artirection.dto;
 
-import java.sql.Timestamp;
-
 public class FavoriteDTO {
-	private int seq;
 	private String mID;
 	private int eSeq;
+	private String category;
 	
-	public int getSeq() {
-		return seq;
+	public FavoriteDTO() {}
+	
+	public FavoriteDTO(String mID, int eSeq) {
+		super();
+		this.mID = mID;
+		this.eSeq = eSeq;
 	}
-	public void setSeq(int seq) {
-		this.seq = seq;
+	
+	public FavoriteDTO(String mID, int eSeq, String category) {
+		super();
+		this.mID = mID;
+		this.eSeq = eSeq;
+		this.category = category;
 	}
+
 	public String getmID() {
 		return mID;
 	}
+
 	public void setmID(String mID) {
 		this.mID = mID;
 	}
+
 	public int geteSeq() {
 		return eSeq;
 	}
+
 	public void seteSeq(int eSeq) {
 		this.eSeq = eSeq;
 	}
-	public FavoriteDTO(int seq, String mID, int eSeq) {
-		super();
-		this.seq = seq;
-		this.mID = mID;
-		this.eSeq = eSeq;
+
+	public String getCategory() {
+		return category;
 	}
-	public FavoriteDTO() {
-		super();
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
-	
-	
 }

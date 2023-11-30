@@ -1,5 +1,7 @@
 package com.artirection.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,5 +19,14 @@ public class FavoriteDAO {
 	
 	public int delete(FavoriteDTO dto) {
 		return db.delete("Favorite.delete", dto);
+	}
+	
+	public List<String> selectById(String id) {
+		return db.selectList("Favorite.selectById", id);
+	}
+	
+	// 빈도수 높은 찜 분류 가져오기
+	public String selectCategoryById(String id) {
+		return db.selectOne("Favorite.selectCategoryById", id);
 	}
 }

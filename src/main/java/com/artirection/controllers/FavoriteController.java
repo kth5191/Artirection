@@ -21,9 +21,9 @@ public class FavoriteController {
 	//찜 목록에 추가
 	@ResponseBody
 	@RequestMapping("insert")
-	public void insertFavorite(int seq) {
+	public void insertFavorite(int seq, String category) {
 		String mID = (String) session.getAttribute("loginID");
-		service.insert(new FavoriteDTO(0, mID, seq));
+		service.insert(new FavoriteDTO(mID, seq, category));
 		
 		return;
 	}
@@ -33,7 +33,7 @@ public class FavoriteController {
 	@RequestMapping("delete")
 	public void deleteFavorite(int seq) {
 		String mID = (String) session.getAttribute("loginID");
-		service.delete(new FavoriteDTO(0, mID, seq));
+		service.delete(new FavoriteDTO(mID, seq));
 		
 		return;
 	}

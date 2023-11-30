@@ -20,4 +20,8 @@ public class BoardDAO {
 	public List<BoardDTO> selectById(String id) {
 		return db.selectList("Board.selectById", id);
 	}
+	
+	public List<BoardDTO> selectBySeq(String seq) {
+		return db.selectList("Board.selectBySeq", seq);
+	}
 }

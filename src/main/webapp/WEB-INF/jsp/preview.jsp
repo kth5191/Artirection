@@ -152,7 +152,7 @@
 		
 	}
 	
-	$(document).on("click","#search",function(){
+$(document).on("click","#search",function(){
 		
 		removeMarker(markers);
 		var sidoIdx=hangjungdong.sido.findIndex(i=>i.sido==$("#sido").val());
@@ -248,7 +248,7 @@
 
 			                let exhibition__icon = $("<div class='exhibition__icon'>");
 			                    let iconWrite = $("<div class='icon2'>");
-			                        let iconWriteATag = $("<a href='/board/write'>");
+			                    let iconWriteATag = $("<a>").attr("href", '/board/write?eSeq=' + tmSeq+"&category="+realmName);
 			                            let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
 			                        iconWriteATag.append(icontWriteIcon);
 			                    iconWrite.append(iconWriteATag);
@@ -347,6 +347,8 @@
 		$(this).toggleClass("bi-heart bi-heart-fill");
 		
 		let parentSeq = $(this).parent().attr("id");
+		let category = $(this).parents(".exhibition__icon").siblings(".exhibition__location").children(".exhibition__area").html();
+		console.log(category);
 		
 		if($(this).attr("class") == 'icon1 bi bi-heart-fill') {
 			$.ajax({
@@ -354,7 +356,8 @@
 				type:"POST",
 				dataType:"text",
 				data:{
-					seq : parentSeq
+					seq : parentSeq,
+					category : category
 				}
 				
 			}).done(function(resp){})
