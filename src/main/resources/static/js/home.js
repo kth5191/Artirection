@@ -4,7 +4,12 @@ $(document).ready(function() {
 		url: "/recommendList"
 	}).done(function(resp){
 
-			$(resp).find("perforList").each(function(){
+       		 var allItems = $(resp).find("perforList");
+
+	        // 랜덤으로 4개의 아이템 선택
+	        var randomItems = getRandomItems(allItems, 4);
+
+			randomItems.each(function(){
 				
 				var seq = $(this).find("seq").text();
 				var title = $(this).find("title").text();
@@ -32,6 +37,12 @@ $(document).ready(function() {
 				rItemDiv.append(rItemImgDiv).append(rItemTitleDiv);
 				$(".recommendBox").append(rItemDiv);
 			})
+			
+			// 랜덤으로 n개의 아이템을 선택하는 함수
+		    function getRandomItems(items, n) {
+		        var shuffled = items.toArray().sort(() => 0.5 - Math.random());
+		        return $(shuffled.slice(0, n));
+		    }
 	})
 	
 	$(document).on("click", ".itemImg", function(){
