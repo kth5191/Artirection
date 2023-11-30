@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <!-- main.css -->
@@ -24,37 +26,60 @@
 <script src="/js/hangjungdong/hangjungdong.js"></script>
 </head>
 
+
+
 <body>
 	<%@ include file="./commons/header.jsp" %>
 	<div class="container border">
 		<div class="contents" id="title">관람하기</div>
 			<div class="contents border" id="map">
 		</div>
-		<nav class="content__navbar navbar-expand contents d-none d-lg-block">
-			<ul class="navbar-nav">
-				<li class="nav__inner border"><select id="sido"><option value="">시/도 선택</option></select></li>
-				<li class="nav__inner border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
-				<li class="nav__inner border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
-				<li class="nav__inner border" id="search-btn">
+		<nav class="content__navbar navbar-expand contents">
+			<ul class="navbar-nav row">
+				<li class="nav__inner col-12 col-md-3"><select id="sido"><option value="">시/도 선택</option></select></li>
+				<li class="nav__inner col-12 col-md-3"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
+				<li class="nav__inner col-12 col-md-3">
+					<select id="keyword">
+						<option value="전체">전체
+						<option value="미술">미술
+						<option value="연극">연극
+						<option value="음악">음악
+						<option value="무용">무용
+						<option value="국악">국악
+					</select>
+				</li>
+				<li class="nav__inner  col-12 col-md-3" id="search-btn">
 					<button class="nav-link text-white" id="search">검색</button>
 				</li>
 			</ul>
 		</nav>
 
-		<nav id="small-navbar" class="content__navbar contents d-block d-lg-none">
-			<ul class="navbar-nav">
-				<li class="nav__inner border"><select id="sido"><option value="">시/도 선택</option></select></li>
-				<li class="nav__inner border"><select id="sigugun"><option value="">시/군/구 선택</option></select></li>
-				<li class="nav__inner border"><select id="museum"><option value="">박물관/미술관 선택</select></li>
-				<li class="nav__inner border" id="search-btn">
-					<button class="text-white" id="search">검색</button>
-				</li>
-			</ul>
-		</nav>
+<!-- 		<nav id="small-navbar" class="content__navbar contents d-block d-lg-none"> -->
+<!-- 			<ul class="navbar-nav"> -->
+<!-- 				<li class="nav__inner border col-12"><select id="sido"><option value="">시/도 선택</option></select></li> -->
+<!-- 				<li class="nav__inner border col-12"><select id="sigugun"><option value="">시/군/구 선택</option></select></li> -->
+<!-- 				<li class="nav__inner border col-12"> -->
+<!-- 					<select id="keyword"> -->
+<!-- 						<option value="전체">전체 -->
+<!-- 						<option value="미술">미술 -->
+<!-- 						<option value="연극">연극 -->
+<!-- 						<option value="음악">음악 -->
+<!-- 						<option value="무용">무용 -->
+<!-- 						<option value="국악">국악 -->
+<!-- 					</select> -->
+<!-- 				</li> -->
+<!-- 				<li class="nav__inner border col-12" id="search-btn"> -->
+<!-- 					<button class="text-white" id="search">검색</button> -->
+<!-- 				</li> -->
+<!-- 			</ul> -->
+<!-- 		</nav> -->
 		
 		<div class="exhibition__content">
 			<!-- 전시 내용 -->
 		</div>
+	</div>
+	<div class="upButton">
+		<a href="#"><i class="fa fa-angle-up fa-lg"></i></a>
 	</div>
 	 <%@ include file="./commons/footer.jsp" %>
 </body>
@@ -75,63 +100,19 @@
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
-	
-	
-	
-	
-	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다
-	  if (navigator.geolocation) {
-	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-	    navigator.geolocation.getCurrentPosition(function (position) {
-	      var lat = position.coords.latitude, // 위도
-	        lon = position.coords.longitude; // 경도
+	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+	var mapTypeControl = new kakao.maps.MapTypeControl();
 
-	      var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-	        message = '<div style="width: 160px; height: 50px; padding:15px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-	      // 마커와 인포윈도우를 표시합니다
-	      displayMarker(locPosition, message);
-	    });
-	    
-	  } else {
-	    // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
-	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-	      message = "geolocation을 사용할수 없어요..";
-
-	    displayMarker(locPosition, message);
-	  }
-
-	  // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-	  function displayMarker(locPosition, message) {
-	    // 마커를 생성합니다
-	    var marker = new kakao.maps.Marker({
-	      map: map,
-	      position: locPosition,
-	    });
-	    
-	    var iwContent = message, // 인포윈도우에 표시할 내용
-	      iwRemoveable = true;
-
-	    // 인포윈도우를 생성합니다
-	    var infowindow = new kakao.maps.InfoWindow({
-	      content: iwContent,
-	      removable: iwRemoveable,
-	    });
-
-	    // 인포윈도우를 마커위에 표시합니다
-	    infowindow.open(map, marker);
-
-	    // 지도 중심좌표를 접속위치로 변경합니다
-	    map.setCenter(locPosition);
-	  }
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new kakao.maps.ZoomControl();
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
-	
-	
-	
-	
-	
-	
+	// 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+	 map.setZoomable(false);   
 	
 	
 	// 지도의 전시회 정보 저장 배열
@@ -152,7 +133,7 @@
 		
 	}
 	
-	$(document).on("click","#search",function(){
+$(document).on("click","#search",function(){
 		
 		removeMarker(markers);
 		var sidoIdx=hangjungdong.sido.findIndex(i=>i.sido==$("#sido").val());
@@ -171,7 +152,8 @@
 			dataType:"text",
 			data:{
 				sido : hangjungdong.sido[sidoIdx].codeNm, //시
-				sigungu : hangjungdong.sigugun[sigugunIdx].codeNm  //시군구
+				sigungu : hangjungdong.sigugun[sigugunIdx].codeNm,  //시군구
+				keyword : $("#keyword").val()
 			}
 			
 		}).done(function(resp){
@@ -241,14 +223,14 @@
 			                        exhibition__area.html(realmName);
 			                    let exhibition__place = $("<div class='exhibition__place'>");
 			                        exhibition__place.html(tmPlace);
-			                    let exhibition__seq = $("<div>");
+			                    let exhibition__seq = $("<div style='display:none'>");
 			                    	exhibition__seq.html(tmSeq);
 			                
 			                exhibition__location.append(exhibition__area).append(exhibition__place).append(exhibition__seq);
 
 			                let exhibition__icon = $("<div class='exhibition__icon'>");
 			                    let iconWrite = $("<div class='icon2'>");
-			                        let iconWriteATag = $("<a href='/board/write'>");
+			                    let iconWriteATag = $("<a>").attr("href", '/board/write?eSeq=' + tmSeq+"&category="+realmName);
 			                            let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
 			                        iconWriteATag.append(icontWriteIcon);
 			                    iconWrite.append(iconWriteATag);
@@ -297,7 +279,7 @@
 	            
 	            
 	            // 인포 윈도우에 표시할 내용
-	            var iwContent = '<div class="markContent" style="text-algin:center; width:200px; height:230px; padding:5px;"> <div><img class="markThumbnail" src='+data[3]+'></div><div>'+data[2]+'</div>'+'<div>'+data[4]+'</div></div>',
+	            var iwContent = '<div class="markContent" style="text-algin:center; width:200px; height:230px; padding:5px;"> <div><img class="markThumbnail" src='+data[3]+'></div><div>'+data[2]+'</div></div>',
 	            	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시
 	            
 	            

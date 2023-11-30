@@ -25,7 +25,10 @@ public class BoardController {
 	
 	// 글 작성 페이지
 	@RequestMapping("write")
-	public String write() {
+	public String write(String eSeq, String category, Model model) {
+		model.addAttribute("eSeq", eSeq);
+		model.addAttribute("category", category);
+		
 		return "/board/write";
 	}
 	// 글 작성하기
@@ -54,9 +57,15 @@ public class BoardController {
 	// 상세페이지 이동
 	@RequestMapping("detail")
 	public String detail(Model model, String seq) {
-		model.addAttribute("seq", seq);
+		List<BoardDTO> boardList = service.selectBySeq(seq);
 		
-		System.out.println(seq);
+		
+		model.addAttribute("seq", seq);
+		model.addAttribute("boardList", boardList);
+		
+		for(BoardDTO dto : boardList) {
+			System.out.println(dto.getbContents());
+		}
 		
 		return "/board/detail";
 	}

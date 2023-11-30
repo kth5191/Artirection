@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
@@ -27,86 +28,35 @@
 	<%@ include file="../commons/header.jsp"%>
 	<div class="container">
 		<div class="DetailContainer">
-<!-- 			<div class="ImageBox col-6 p-0 m-0"> -->
-<!-- 				<img class="ImageBox__inner" src="img.png"> -->
-<!-- 			</div> -->
-	
-<!-- 			<div class="detailBox col-6"> -->
-<!-- 				<h2 class="title">전시회 제목</h2> -->
-<!-- 				<div class="infoBox row p-0 m-0"> -->
-<!-- 					<div class="myBox col-12"> -->
-<!-- 						<div class="detailInfoBox periodBox row"> -->
-<!-- 							<div class="name col-3 col-md-2"> -->
-<!-- 								<div class="detailText">기간</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-1 col-md-1"> -->
-<!-- 								<span>|</span> -->
-<!-- 							</div> -->
-<!-- 							<div class="period col-8 col-md-9"> -->
-<!-- 								<span>시작일 - 마감일</span> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="detailInfoBox placeBox row"> -->
-<!-- 							<div class="phone col-3 col-md-2"> -->
-<!-- 								<div class="detailText">장소</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-1 col-md-1"> -->
-<!-- 								<span>|</span> -->
-<!-- 							</div> -->
-<!-- 							<div class="place col-8 col-md-9"> -->
-<!-- 								<span> 위치 </span> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="detailInfoBox categoriBox row"> -->
-<!-- 							<div class="email col-3 col-md-2"> -->
-<!-- 								<div class="detailText">분류</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-1 col-md-1"> -->
-<!-- 								<span>|</span> -->
-<!-- 							</div> -->
-<!-- 							<div class="categori col-8 col-md-9"> -->
-<!-- 								<span>공연</span> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="detailInfoBox priceBox row"> -->
-<!-- 							<div class="price__kor col-3 col-md-2"> -->
-<!-- 								<div class="detailText">요금</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-1 col-md-1"> -->
-<!-- 								<span>|</span> -->
-<!-- 							</div> -->
-<!-- 							<div class="price col-8 col-md-9"> -->
-<!-- 								<span>무료</span> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="detailInfoBox officialBox row"> -->
-<!-- 							<div class="official__kor col-3 col-md-2"> -->
-<!-- 								<div class="detailText">공식홈</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-1 col-md-1"> -->
-<!-- 								<span>|</span> -->
-<!-- 							</div> -->
-<!-- 							<div class="official col-8 col-md-9"> -->
-<!-- 								<span>바로가기</span> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			
 		</div>
 		
-		<div class="reviewListBox col-12">
-			<div class="reviewBoxTitle">관람평</div>
-			<div class="reviewBox col-12">
-				<div class="userId row-12">유저 아이디</div>
-				<div class="contentBox">
-					<div class="userContent row-11">유저가 작성한 관람평</div>
-					<div class="userStar row-1">*****</div>
+		<!-- 내 리뷰 출력 -->
+		<c:forEach var="board" items="${boardList}">
+			<div class="reviewListBox col-12">
+				<div class="reviewBoxTitle">${board.bTitle }</div>
+				<div class="reviewBox col-12">
+					<div class="userId row-12">${board.bID }</div>
+					<div class="contentBox">
+						<div class="userContent row-11">${board.bContents }</div>
+						<!-- 별점 수만큼 색칠하여 출력 -->
+						<div class="star col-5 col-md-2" data-rating="${board.bGrade}">
+							<c:forEach var="i" begin="1" end="5">
+								<span data-value="${i}"> <c:choose>
+										<c:when test="${i <= board.bGrade}">
+											<i class="fas fa-star" style="color: gold;"></i>
+										</c:when>
+										<c:otherwise>
+											<i class="far fa-star"></i>
+										</c:otherwise>
+									</c:choose>
+								</span>
+							</c:forEach>
+						</div>
+					</div>
+					<div class="userWriteDate">${board.bWriteDate }</div>
 				</div>
-				<div class="userWriteDate">2023-11-28</div>
 			</div>
-		</div>
+		</c:forEach>
 	</div>
 	<%@ include file="../commons/footer.jsp"%>
 </body>
