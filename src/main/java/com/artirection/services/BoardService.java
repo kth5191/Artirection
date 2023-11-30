@@ -31,4 +31,8 @@ public class BoardService {
 	public List<CategoryCountDTO> getCategoryById(String id) {
 		return bdao.getCategoryById(id);
 	}
+	
+	public BoardDTO selectByBSeq(String bSeq) {
+		return bdao.selectBybSeq(bSeq);
+	}
 }

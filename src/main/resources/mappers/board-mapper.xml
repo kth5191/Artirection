@@ -15,6 +15,10 @@
 		SELECT * FROM board WHERE eSeq = #{seq}
 	</select>
 	
+	<select id="selectBybSeq" resultType="com.artirection.dto.BoardDTO">
+		SELECT * FROM board WHERE bSeq = #{bSeq}
+	</select>
+	
 	<select id="getCategoryById" resultType="com.artirection.dto.CategoryCountDTO">
 		SELECT category, COUNT(*) AS categoryCount
 		FROM board
