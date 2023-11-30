@@ -32,10 +32,12 @@
 </head>
 
 <body>
+	<%@ include file="../commons/header.jsp"%>
 	<div class="boardWrite container">
 		<div class="boardWrite_guide">
 			<form action="/board/writeProc" method="post" enctype="multipart/form-data">
-
+				<input type='text' name="eSeq" value=${eSeq } hidden>
+				<input type='text' name="category" value=${category } hidden>
 				<div class="writeTitle">기록하기</div>
 
 				<input type="text" class="inputTitle" name="bTitle" placeholder="제목을 입력하세요">
@@ -60,6 +62,7 @@
 			</form>
 		</div>
 	</div>
+	<%@ include file="../commons/footer.jsp"%>
 </body>
 
 <script>

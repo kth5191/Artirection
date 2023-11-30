@@ -31,6 +31,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	-webkit-appearance: none;
 	margin: 0;
 }
+.myBox {
+	padding: 30px;
+}
 </style>
 </head>
 <body>
@@ -73,8 +76,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 							<span>|</span>
 						</div>
 						<div class="userPhone col-8 col-md-10">
-							<span class="infoSpan"> ${fn:substring(dto.phone,0,3) }-${fn:substring(dto.phone,3,7) }-${fn:substring(dto.phone,7,11) } </span> 
-							<span class="infoInput"><input type="number" id="phoneInput" name="phone"></span>
+							<span class="infoSpan"> ${fn:substring(dto.phone,0,3) }-${fn:substring(dto.phone,3,7) }-${fn:substring(dto.phone,7,11) } </span> <span class="infoInput"><input type="number" id="phoneInput" name="phone"></span>
 						</div>
 					</div>
 					<div class="detailInfoBox emailBox row">
@@ -108,9 +110,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 		<!-- 내 리뷰 출력 -->
 		<c:forEach var="board" items="${boardList}">
-			<div class="contentBox row p-0 m-0">
+			<div id="${board.eSeq}" class="contentBox row p-0 m-0">
 				<div class="imgBox col-5 col-sm-3 col-lg-2 p-0">
-					<img src="img.png">
+					<img src="" style="width:100px; height:100px;">
 				</div>
 				<div class="descBox col-7 col-sm-9 col-lg-10 p-0">
 					<div class="row h-100">
@@ -191,6 +193,45 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 	        $(".update2_div").hide();
 	    }
 	}
+	
+	$(document).ready(function () {
+		
+		for (var i = 0; i < $(".contentBox").length; i++) {
+			var eSeq = $(".contentBox").eq(i).attr("id");
+			
+			
+			$.ajax({
+			      url: "/api/selectByDetail",
+			      data: {
+			        seq: eSeq
+			      }
+			    }).done(function (resp) {
+			    	console.log(resp);
+			    	
+			    	var tmTitle = $(resp).find("title").text();
+			    	var tmImgUrl = $(resp).find("imgUrl").text();
+			    	var tmStartDate = $(resp).find("startDate").text();
+			    	var tmEndDate = $(resp).find("endDate").text();
+			    	var tmPlace = $(resp).find("place").text();
+			    	var tmSeq = $(resp).find("seq").first().text();
+			    	
+			    	var targetDiv = document.getElementById(tmSeq);
+			    	// 이미지 삽입
+			    	var img= targetDiv.querySelector('.imgBox img');
+			    	img.setAttribute('style', 'width: 150px; height: 180px; margin-right: 10px');
+			    	img.src = tmImgUrl;
+			    	// 제목 삽입
+			    	var title= targetDiv.querySelector('.title h4');
+			    	title.textContent = tmTitle;
+			    	// 장소 삽입
+			    	var place = targetDiv.querySelector('.place span');
+					place.textContent = tmPlace;
+					// 날짜 삽입
+					var date = targetDiv.querySelector('.date span');
+					date.textContent = tmStartDate + "-" + tmEndDate;
+		});
+		}
+	});
 	</script>
 </body>
 </html>

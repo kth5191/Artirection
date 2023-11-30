@@ -63,6 +63,11 @@ $(document).ready(function () {
 	
 		      let img_div = $("<div class='search__img'>");
 		      let img = $("<img class='exhibition__img'> ");
+		      img.css({
+		    	    'width': '150px',
+		    	    'height-color': '180px',
+		    	    'margin-right': '10px'
+		    	});
 		      img.attr("src", tmImgUrl);
 		      img_div.append(img);
 	

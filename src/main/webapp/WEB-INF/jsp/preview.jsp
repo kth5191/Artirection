@@ -152,7 +152,7 @@
 		
 	}
 	
-	$(document).on("click","#search",function(){
+$(document).on("click","#search",function(){
 		
 		removeMarker(markers);
 		var sidoIdx=hangjungdong.sido.findIndex(i=>i.sido==$("#sido").val());
@@ -248,7 +248,7 @@
 
 			                let exhibition__icon = $("<div class='exhibition__icon'>");
 			                    let iconWrite = $("<div class='icon2'>");
-			                        let iconWriteATag = $("<a href='/board/write'>");
+			                    let iconWriteATag = $("<a>").attr("href", '/board/write?eSeq=' + tmSeq+"&category="+realmName);
 			                            let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
 			                        iconWriteATag.append(icontWriteIcon);
 			                    iconWrite.append(iconWriteATag);

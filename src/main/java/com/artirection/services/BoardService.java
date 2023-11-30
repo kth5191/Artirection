@@ -21,4 +21,9 @@ public class BoardService {
 	public List<BoardDTO> selectById(String id) {
 		return bdao.selectById(id);
 	}
+	
+	// 공연번호로 작성 리뷰 검색
+	public List<BoardDTO> selectBySeq(String seq) {
+		return bdao.selectBySeq(seq);
+	}
 }
