@@ -1,4 +1,47 @@
-//$(document).ready(function() {
+$(document).ready(function() {
+	
+	$.ajax({
+		url: "/recommandList"
+	}).done(function(resp){
+		console.log("분류 : " + resp.length);
+		
+			
+			$(resp).find("perforList").each(function(){
+				
+				var seq = $(this).find("seq").text();
+				var title = $(this).find("title").text();
+				var image = $(this).find("thumbnail").text();
+				
+				let rItemDiv = $("<div>");
+				rItemDiv.addClass("recommandItem col-12 col-md-6 col-xl-3");
+				
+				let rItemImgDiv = $("<div>");
+				rItemImgDiv.addClass("itemImgBox");
+				
+				let rItemImg = $("<img>");
+				rItemImg.addClass("itemImg img-fluid");
+				rItemImg.attr({
+					"src" : image,
+					"data-seq" : seq
+				});
+				
+				rItemImgDiv.append(rItemImg);
+				
+				let rItemTitleDiv = $("<div>");
+				rItemTitleDiv.addClass("itemTitle");
+				rItemTitleDiv.html(title);
+				
+				rItemDiv.append(rItemImgDiv).append(rItemTitleDiv);
+				$(".recommandBox").append(rItemDiv);
+			})
+	})
+	
+	$(document).on("click", ".itemImg", function(){
+		var seq = $(this).attr("data-seq");
+		location.href = "/board/detail?seq=" + seq;
+	})
+	
+	
 //	// 카카오 지도 띄우기
 //	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 //    mapOption = { 
@@ -55,4 +98,4 @@
 //	    // 지도 중심좌표를 접속위치로 변경합니다
 //	    map.setCenter(locPosition);      
 //	}    
-//})
+})

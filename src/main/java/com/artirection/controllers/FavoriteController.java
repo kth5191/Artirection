@@ -21,9 +21,9 @@ public class FavoriteController {
 	//찜 목록에 추가
 	@ResponseBody
 	@RequestMapping("insert")
-	public void insertFavorite(int seq) {
+	public void insertFavorite(int seq, String category) {
 		String mID = (String) session.getAttribute("loginID");
-		service.insert(new FavoriteDTO(mID, seq));
+		service.insert(new FavoriteDTO(mID, seq, category));
 		
 		return;
 	}

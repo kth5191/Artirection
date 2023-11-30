@@ -347,6 +347,8 @@
 		$(this).toggleClass("bi-heart bi-heart-fill");
 		
 		let parentSeq = $(this).parent().attr("id");
+		let category = $(this).parents(".exhibition__icon").siblings(".exhibition__location").children(".exhibition__area").html();
+		console.log(category);
 		
 		if($(this).attr("class") == 'icon1 bi bi-heart-fill') {
 			$.ajax({
@@ -354,7 +356,8 @@
 				type:"POST",
 				dataType:"text",
 				data:{
-					seq : parentSeq
+					seq : parentSeq,
+					category : category
 				}
 				
 			}).done(function(resp){})
