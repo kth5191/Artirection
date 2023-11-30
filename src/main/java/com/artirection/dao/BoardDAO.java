@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.artirection.dto.BoardDTO;
+import com.artirection.dto.CategoryCountDTO;
 
 @Repository
 public class BoardDAO {
@@ -23,5 +24,9 @@ public class BoardDAO {
 	
 	public List<BoardDTO> selectBySeq(String seq) {
 		return db.selectList("Board.selectBySeq", seq);
+	}
+	
+	public List<CategoryCountDTO> getCategoryById(String id) {
+		return db.selectList("Board.getCategoryById", id);
 	}
 }
