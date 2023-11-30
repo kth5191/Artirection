@@ -46,7 +46,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 		<form action="/member/updateById" method="POST">
 			<div class="infoBox row p-0 m-0">
 				<div class="myBox col-12">
-					<div class="idBox row">
+					<div class="detailInfoBox idBox row">
 						<div class="id col-3 col-md-1">
 							<span>아이디</span>
 						</div>
@@ -57,7 +57,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 							<span>${dto.mID }</span>
 						</div>
 					</div>
-					<div class="nameBox row">
+					<div class="detailInfoBox nameBox row">
 						<div class="name col-3 col-md-1">
 							<span>이름</span>
 						</div>
@@ -68,7 +68,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 							<span class="infoSpan">${dto.name }</span> <span class="infoInput"><input type="text" id="nameInput" name="name"></span>
 						</div>
 					</div>
-					<div class="phoneBox row">
+					<div class="detailInfoBox phoneBox row">
 						<div class="phone col-3 col-md-1">
 							<span>연락처</span>
 						</div>
@@ -79,7 +79,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 							<span class="infoSpan"> ${fn:substring(dto.phone,0,3) }-${fn:substring(dto.phone,3,7) }-${fn:substring(dto.phone,7,11) } </span> <span class="infoInput"><input type="number" id="phoneInput" name="phone"></span>
 						</div>
 					</div>
-					<div class="emailBox row">
+					<div class="detailInfoBox emailBox row">
 						<div class="email col-3 col-md-1">
 							<span>이메일</span>
 						</div>
@@ -91,11 +91,11 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 						</div>
 					</div>
 					<div class="updateBtnBox row">
-						<div class="col-9 col-md-9"></div>
-						<div class="update1_div col-3 col-md-3">
+						<div class="col-9 col-md-10"></div>
+						<div class="update1_div col-3 col-md-2">
 							<button type="button" class="updateBtn p-0" onclick="toggleEdit()">수정하기</button>
 						</div>
-						<div class="update2_div col-3 col-md-3">
+						<div class="update2_div col-3 col-md-2">
 							<button type="submit" class="updateBtn p-0">수정완료</button>
 							<button type="button" class="updateBtn p-0" onclick="toggleEdit()">취소하기</button>
 						</div>

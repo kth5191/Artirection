@@ -5,12 +5,16 @@
 <mapper namespace="Favorite">
 
 	<insert id="insert">
-		INSERT INTO favorite VALUES (#{mID}, #{eSeq})
+		INSERT INTO favorite VALUES (#{mID}, #{eSeq}, #{category})
 	</insert>
 	<delete id="delete">
 		DELETE FROM favorite WHERE mID = #{mID} and eseq = #{eSeq} 
 	</delete>
 	<select id="selectById" resultType="String">
 		SELECT eSeq FROM favorite WHERE mID = #{mID}
+	</select>
+	<!-- 빈도수 높은 찜 분류 가져오기 -->
+	<select id="selectCategoryById" resultType="String">
+		SELECT category FROM favorite GROUP BY category ORDER BY COUNT(*) DESC LIMIT 1
 	</select>
 </mapper>

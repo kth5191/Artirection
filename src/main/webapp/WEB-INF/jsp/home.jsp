@@ -36,11 +36,8 @@
             </div>
         </div>
 
-        <div id="monthTitle" class="colorBlack">이 달의 전시</div>
-        <div id="monthExhibition" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                
-            </div>
+        <div id="recommendTitle" class="colorBlack">이런 전시를 좋아하실 것 같아요!</div>
+        <div class="recommendBox row">
         </div>
     </div>
     
@@ -87,16 +84,16 @@
                 
                 imgDiv.append(img);
                 
-                $(".carousel-inner").append(imgDiv);
+                // $(".carousel-inner").append(imgDiv);
 				
-				console.log(one);
+				// console.log(one);
 				mapData.push(one);
 			})
 			
 		}
 		
-		console.log(mapData);
-		$(".carousel-inner").children().first().addClass("active");
+		// console.log(mapData);
+		// $(".carousel-inner").children().first().addClass("active");
 
 
 		// 인포윈도우 배열
