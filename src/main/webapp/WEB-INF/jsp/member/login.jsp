@@ -19,6 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
 </head>
 <body>
 	<div id="container" class="container-fluid p-3">
@@ -113,24 +114,25 @@
 	//	아이디 기억 cookie
 	$("#id").val(Cookies.get("key"));
 	
-	if($("#id").val() != ""){
-		$("#idSaveCheck").attr("checked",true);
-	}
+	if ($("#id").val() !== "") {
+        $("#idSaveCheck").attr("checked", true);
+    }
 		
 	$("#idSaveCheck").change(function(){
-		
 		if($("#idSaveCheck").is(":checked")){
+			console.log($("#id").val());
 			Cookies.set("key",$("#id").val(),{expires:7});
 		}else{
 			Cookies.remove("key");
 		}
 	});
 	
-	$("#userID").keyup(function(){
-		if($("#idSaveCheck").is(":checked")){
-			Cookies.set("key",$("#userId").val(),{expires:7});
-		}
-	});
+	$("#id").keyup(function () {
+        if ($("#idSaveCheck").is(":checked")) {
+        	console.log($("#id").val());
+            Cookies.set("key", $("#id").val(), { expires: 7 });
+        }
+    });
 </script>
 
 
