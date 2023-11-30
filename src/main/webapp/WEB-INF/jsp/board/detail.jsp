@@ -10,6 +10,10 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 <!-- 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -19,6 +23,11 @@
 <!-- 폰트어썸 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- kakaomap -->
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=65ff7e05f6753f3faa6cb9cbf7667308&libraries=services,clusterer,drawing"></script>
+
 
 <link rel="stylesheet" href="/css/commons/font.css">
 <link rel="stylesheet" href="/css/board/detail.css">
@@ -30,7 +39,18 @@
 		<div class="DetailContainer">
 		</div>
 		
+		<div class="wrap1">
+            <div class="wrap2">
+                <div id="map" class="content border">
+		
+                </div>
+            </div>
+        </div>
+		
 		<!-- 내 리뷰 출력 -->
+		<div class="Detail__review">
+			<i class="fa-solid fa-user"></i>관람평
+		</div>
 		<c:forEach var="board" items="${boardList}">
 			<div class="reviewListBox col-12">
 				<div class="reviewBoxTitle">${board.bTitle }</div>
@@ -86,7 +106,9 @@
 				var tmPrice = $(this).find("price").text();
 				var tmImgUrl = $(this).find("imgUrl").text();
 				var tmUrl = $(this).find("url").text();
-			
+				var tmX = $(this).find("gpsX").text();
+				var tmY = $(this).find("gpsY").text();
+				
 
 
 			let ImageBox = $("<div class='ImageBox col-6 p-0 m-0'>")
@@ -217,7 +239,64 @@
 			console.log(detailBox);
 				
 							
-			$(".DetailContainer").append(ImageBox).append(detailBox);					
+			$(".DetailContainer").append(ImageBox).append(detailBox);	
+			
+			
+			
+			// 카카오맵 api
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = { 
+			    center: new kakao.maps.LatLng(tmY, tmX), // 지도의 중심좌표
+			    level: 8 // 지도의 확대 레벨
+			};
+			
+			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+			var mapTypeControl = new kakao.maps.MapTypeControl();
+		
+			// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+			// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+		
+			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+			var zoomControl = new kakao.maps.ZoomControl();
+			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+			
+			// 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+			 map.setZoomable(false);  
+			
+			console.log(tmY + " : " +tmX)
+			
+			 // 마커가 찍힌 위치의 좌표
+			  var markerPosition = new kakao.maps.LatLng(tmY, tmX);
+
+			  // 마커 생성
+			  var marker = new kakao.maps.Marker({
+			    position: markerPosition
+			  });
+
+			  // 마커 지도에 표시
+			  marker.setMap(map);
+
+			  // 인포윈도우 내용
+			  var infowindowContent = '<div class="markThumbnail" style="text-algin:center; width:200px; height:200px; padding:5px;"> <div><img class="markThumbnail" src='+tmImgUrl+'></div><div>'+tmTitle+'</div></div>';
+
+			  // 인포윈도우 생성
+			  var infowindow = new kakao.maps.InfoWindow({
+			    content: infowindowContent,
+			    removable: true
+			  });
+
+			// 마커에 클릭 이벤트 추가
+			  kakao.maps.event.addListener(marker, 'click', function() {
+			    // 클릭 시 인포윈도우 열기
+			    infowindow.open(map, marker);
+			  });
+			
+			
+			
 								
 			})				
 								
@@ -225,6 +304,8 @@
 			
 			
 		})
+		
+		
 
 
 </script>
