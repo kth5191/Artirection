@@ -73,76 +73,64 @@
 				var tmX = $(this).find("gpsX").text();
 				var tmY = $(this).find("gpsY").text();
 				var tmImg = $(this).find("thumbnail").text();
-				
-//					console.log(tmTitle);
-				
-				one = [tmY,tmX,tmTitle,tmImg];
-				
-				var imgDiv = $("<div class='carousel-item'>");
-                var img = $("<img src='' class='d-block w-100'>");
-                img.attr("src", tmImg);
-                
-                imgDiv.append(img);
-                
-                // $(".carousel-inner").append(imgDiv);
-				
-				// console.log(one);
+				var tmSeq = $(this).find("seq").text();
+
+				one = [tmY,tmX,tmTitle,tmImg,tmSeq];
+
 				mapData.push(one);
 			})
 			
 		}
+
+		var customOverlays = [];
+
+		mapData.forEach(function(data) {
+		    var position = new kakao.maps.LatLng(data[0], data[1]);
+		    
+		    // 마커를 생성하고 지도에 표시
+		    var marker = new kakao.maps.Marker({
+		        position: position,
+		        map: map
+		    });
 		
-		// console.log(mapData);
-		// $(".carousel-inner").children().first().addClass("active");
-
-
-		// 인포윈도우 배열
-		var infowindows = [];
-		mapData.forEach(function(data){
-			
-            // 지도에 마커를 생성하고 표시한다
-            var marker = new kakao.maps.Marker({
-                position: new kakao.maps.LatLng(data[0], data[1],data[2],data[3]), // 마커의 좌표
-                map: map // 마커를 표시할 지도 객체
-            });
-            
-            // 인포 윈도우에 표시할 내용
-            var iwContent = '<div class="markContent" style="padding:5px;"> <div><img class="markThumbnail" src='+data[3]+'></div>'+data[2]+'</div>',
-            	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시
-            
-            
-            var infowindow = new kakao.maps.InfoWindow({
-                position : marker.getPosition(), 
-                content : iwContent,
-                removable : iwRemoveable //true
-            });
-            
-            // 생성된 인포윈도우를 배열에 담아줍니다.
-            infowindows.push(infowindow);
-            
-         	// 마커에 해당하는 인포윈도우 index를 저장합니다.
-            marker.infowindowIdx = infowindows.length - 1;
-         
-            kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {
-                allInfowindowClose();
-
-                // 마커에 해당되는 infowindow를 열어줍니다.
-                var infowindow = infowindows[this.infowindowIdx];
-                infowindow.open(map, this);
-            });
-         
+		    // 커스텀 오버레이에 표시할 내용
+		    var overlayContent = '<div class="customOverlayContent" style="padding:5px;">' +
+		        '<div><a href="/board/detail?seq=' + data[4] + '"><img class="customOverlayThumbnail" src=' + data[3] + '></a></div>' + 
+		        '<div>' + data[2] + '</div>' +
+		        '</div>';
+		    
+		    var customOverlay = new kakao.maps.CustomOverlay({
+		        position: position,
+		        content: overlayContent,
+		        clickable: true
+		    });
+		
+		    customOverlays.push(customOverlay);
+		
+		    kakao.maps.event.addListener(marker, 'click', function() {
+		        allCustomOverlaysClose();
+		
+		        // 클릭한 마커에 해당되는 CustomOverlay를 지도에 표시
+		        var overlay = customOverlays[marker.customOverlayIdx];
+		        overlay.setMap(map);
+		    });
+		
+		    // 생성된 CustomOverlay를 배열에 담아줍니다.
+		    marker.customOverlayIdx = customOverlays.length - 1;
 		});
 		
-		// 모든 infowindow를 닫아줍니다.
-		function allInfowindowClose() {
-		    for(var i=0; i<infowindows.length; i++) {
-		        var infowindow = infowindows[i];
-		        infowindow.close();
+		// 지도 클릭 시 모든 CustomOverlay를 닫아줍니다.
+		kakao.maps.event.addListener(map, 'click', function() {
+		    allCustomOverlaysClose();
+		});
+
+		// 모든 CustomOverlay를 닫아줍니다.
+		function allCustomOverlaysClose() {
+		    for (var i = 0; i < customOverlays.length; i++) {
+		        var overlay = customOverlays[i];
+		        overlay.setMap(null);
 		    }
 		}
-		
-
-		
 	});
 
 </script>
