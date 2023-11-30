@@ -5,19 +5,38 @@
 	margin: auto;
 }
 
-.contents {
-	width: 85%;
-	margin-left: 7.5%;
-	margin-right: 7.5%;
+.wrap1 {
+    width: 90%;
+    margin: 60px auto 100px;
 }
 
+.wrap2 {
+    padding-top: 40%;
+    position: relative;
+    width: 100%;
+}
+
+.content {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+/*.contents {*/
+/*	width: 85%;*/
+/*	margin-left: 7.5%;*/
+/*	margin-right: 7.5%;*/
+/*	border-radius: 10px;*/
+/*}*/
+
 #title {
-	margin-top: 150px;
+	margin-top: 50px;
 	font-size: 35px;
 }
 
 #map {
-	height: 600px;
 
 	margin-top: 30px;
 	margin-bottom: 50px;
@@ -25,6 +44,11 @@
 .content__navbar{
 	margin-bottom: 50px;
 }
+
+.nav__inner select{
+	border-radius: 10px;
+}
+
 .navbar-nav {
 	width: 100%;
 }
@@ -55,6 +79,7 @@
 	width: 100%; height: 100%;
 	border: none;
 	background-color: #778C86;
+	border-radius: 10px;
 }
 
 /* 전시회 이미지 */
@@ -68,6 +93,7 @@
 	padding: 20px;
 
 	margin-bottom: 20px;
+	border-radius: 10px !important; 
 }
 
 .exhibition__inner{
@@ -87,8 +113,6 @@
 	margin-bottom: 5px;
 
 	font-size: 15px;
-
-
 
 	overflow: hidden;
 	text-overflow: ellipsis;
