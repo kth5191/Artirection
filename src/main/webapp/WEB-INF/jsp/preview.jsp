@@ -32,8 +32,16 @@
 	<%@ include file="./commons/header.jsp" %>
 	<div class="container border">
 		<div class="contents" id="title">관람하기</div>
-			<div class="contents border" id="map">
-		</div>
+		
+			<div class="wrap1">
+	            <div class="wrap2">
+	                <div id="map" class="content border">
+			
+	                </div>
+	            </div>
+	        </div>
+		
+
 		<nav class="content__navbar navbar-expand contents">
 			<ul class="navbar-nav row">
 				<li class="nav__inner col-12 col-md-3"><select id="sido"><option value="">시/도 선택</option></select></li>
@@ -54,26 +62,6 @@
 			</ul>
 		</nav>
 
-<!-- 		<nav id="small-navbar" class="content__navbar contents d-block d-lg-none"> -->
-<!-- 			<ul class="navbar-nav"> -->
-<!-- 				<li class="nav__inner border col-12"><select id="sido"><option value="">시/도 선택</option></select></li> -->
-<!-- 				<li class="nav__inner border col-12"><select id="sigugun"><option value="">시/군/구 선택</option></select></li> -->
-<!-- 				<li class="nav__inner border col-12"> -->
-<!-- 					<select id="keyword"> -->
-<!-- 						<option value="전체">전체 -->
-<!-- 						<option value="미술">미술 -->
-<!-- 						<option value="연극">연극 -->
-<!-- 						<option value="음악">음악 -->
-<!-- 						<option value="무용">무용 -->
-<!-- 						<option value="국악">국악 -->
-<!-- 					</select> -->
-<!-- 				</li> -->
-<!-- 				<li class="nav__inner border col-12" id="search-btn"> -->
-<!-- 					<button class="text-white" id="search">검색</button> -->
-<!-- 				</li> -->
-<!-- 			</ul> -->
-<!-- 		</nav> -->
-		
 		<div class="exhibition__content">
 			<!-- 전시 내용 -->
 		</div>
@@ -265,9 +253,21 @@ $(document).on("click","#search",function(){
 			// 인포윈도우 배열
 			var infowindows = [];
 			
+// 			// 마커들을 담을 LatLngBounds 객체 생성
+//             var bounds = new kakao.maps.LatLngBounds();
+         	
+			
+			// 이전에 생성한 마커들을 제거
+			for (var i = 0; i < markers.length; i++) {
+			    markers[i].setMap(null);
+			}
+			markers = [];  // 마커 배열 초기화
+			
+			// 이전에 사용한 bounds를 초기화
+			bounds = new kakao.maps.LatLngBounds();
+			
 			
 			mapData.forEach(function(data){
-				
 				
 				
 	            // 지도에 마커를 생성하고 표시한다
@@ -276,6 +276,7 @@ $(document).on("click","#search",function(){
 	                map: map // 마커를 표시할 지도 객체
 	            });
 	            markers.push(marker);
+	            
 	            
 	            
 	            // 인포 윈도우에 표시할 내용
@@ -306,6 +307,28 @@ $(document).on("click","#search",function(){
 	            });
 	         	
 			});
+			
+			// 검색결과가 아무것도 없을 때는 서울을 기본으로 보여줌
+			if(markers.length <= 0){
+				var defaultCenter = new kakao.maps.LatLng(37.54322842, 126.988345046);
+				map.setCenter(defaultCenter);
+				
+			}
+			// 검색 결과가 하나라도 있으면 그곳으로 이동
+			else{
+				// 모든 마커를 포함하는 LatLngBounds 객체 생성
+	            var bounds = new kakao.maps.LatLngBounds();
+
+	            // 모든 마커의 좌표를 LatLngBounds에 포함시킴
+	            for (var i = 0; i < markers.length; i++) {
+	                bounds.extend(markers[i].getPosition());
+	            }
+
+	            // 지도의 뷰포트를 마커들을 모두 포함하는 영역으로 조절
+	            map.setBounds(bounds);
+			}
+			
+			
 			
 			console.log("마커스 길이"+markers.length);
 			
