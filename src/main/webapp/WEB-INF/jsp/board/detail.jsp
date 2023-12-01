@@ -53,9 +53,8 @@
 		</div>
 		<c:forEach var="board" items="${boardList}">
 			<div class="reviewListBox col-12">
-				<div class="reviewBoxTitle">${board.bTitle }</div>
 				<div class="reviewBox col-12">
-					<div class="userId row-12">${board.bID }</div>
+					<div class="userId row-12">${board.bTitle }</div>
 					<div class="contentBox">
 						<div class="userContent row-11">${board.bContents }</div>
 						<!-- 별점 수만큼 색칠하여 출력 -->
@@ -73,6 +72,7 @@
 							</c:forEach>
 						</div>
 					</div>
+					<div class="userWriteDate">${board.bID }</div>
 					<div class="userWriteDate">${board.bWriteDate }</div>
 				</div>
 			</div>

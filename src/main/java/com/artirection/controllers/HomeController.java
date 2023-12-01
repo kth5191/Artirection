@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.artirection.dto.FavoriteDTO;
 import com.artirection.services.FavoriteService;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,7 +34,12 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/preview")
-	public String preview() {
+	public String preview(Model model) {
+		String loginID = (String) session.getAttribute("loginID");
+		List<FavoriteDTO> fList = fservice.selectAllById(loginID);
+		
+		model.addAttribute("fList",fList);
+		
 		return "preview";
 	}
 	
