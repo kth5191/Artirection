@@ -111,79 +111,80 @@ canvas {
 				</div>
 			</div>
 		</form>
-		
-		
-		<div hidden>
-		<c:forEach var="categoryCount" items="${favoriteCount}">
-			<div class="favoriteLabels">
-				${categoryCount.category }
-			</div>
-			<div class="favoriteData">
-				${categoryCount.categoryCount }
-			</div>
-		</c:forEach>
-		
-		<c:forEach var="categoryCount" items="${boardCount}">
-			<div class="boardLabels">
-				${categoryCount.category }
-			</div>
-			<div class="boardData">
-				${categoryCount.categoryCount }
-			</div>
-		</c:forEach>
-		</div>
-		<h3 id="chartTitle" class="myrecord col-12">통계</h4>
-		<div id="chartDiv" class="col-12" align="center">
-			<canvas id="favoriteChart" width="200px" height="200px"></canvas>
-			<canvas id="boardChart" width="200px" height="200px"></canvas>
-		</div>
-		<div class="myrecordBox">
-			<h3 class="myrecord col-12">나의 기록</h3>
-		</div>
 
-		<!-- 내 리뷰 출력 -->
-		<c:forEach var="board" items="${boardList}">
-			<div id="${board.eSeq}" class="contentBox row p-0 m-0">
-				<div class="imgBox col-5 col-sm-3 col-lg-2 p-0">
-					<img src="" style="width:100px; height:100px;">
+		<h3 id="chartTitle" class="myrecord col-12">통계</h3>
+		<c:choose>
+			<c:when test="${fn:length(boardCount) eq 0 and fn:length(favoriteCount) eq 0}">
+				<div align="center">
+					<h3 id="chartTitle" class="myrecord col-12">표시할 내용이 없습니다.</h3>
 				</div>
-				<div class="descBox col-7 col-sm-9 col-lg-10 p-0">
-					<div class="row h-100">
-						<div class="titleBox col-12">
-							<div class="title">
-								<span><a href="/board/view?bSeq=${board.bSeq }"><h4 style="margin: 0;">전시회1</h4></a></span>
-							</div>
-						</div>
-						<div class="placeBox col-12">
-							<div class="place">
-								<span>전시장소</span>
-							</div>
-						</div>
-						<div class="dateBox col-12">
-							<div class="row g-0">
-								<div class="date col-7 col-md-10">
-									<span>전시날짜</span>
+			</c:when>
+			<c:otherwise>
+				<div hidden>
+					<c:forEach var="categoryCount" items="${favoriteCount}">
+						<div class="favoriteLabels">${categoryCount.category }</div>
+						<div class="favoriteData">${categoryCount.categoryCount }</div>
+					</c:forEach>
+
+					<c:forEach var="categoryCount" items="${boardCount}">
+						<div class="boardLabels">${categoryCount.category }</div>
+						<div class="boardData">${categoryCount.categoryCount }</div>
+					</c:forEach>
+				</div>
+				<div id="chartDiv" class="col-12" align="center">
+					<canvas id="favoriteChart" width="200px" height="200px"></canvas>
+					<canvas id="boardChart" width="200px" height="200px"></canvas>
+				</div>
+			</c:otherwise>
+		</c:choose>
+
+			<div class="myrecordBox">
+				<h3 class="myrecord col-12">나의 기록</h3>
+			</div>
+
+			<!-- 내 리뷰 출력 -->
+			<c:forEach var="board" items="${boardList}">
+				<div id="${board.eSeq}" class="contentBox row p-0 m-0">
+					<div class="imgBox col-5 col-sm-3 col-lg-2 p-0">
+						<img src="" style="width: 100px; height: 100px;">
+					</div>
+					<div class="descBox col-7 col-sm-9 col-lg-10 p-0">
+						<div class="row h-100">
+							<div class="titleBox col-12">
+								<div class="title">
+									<span><a href="/board/view?bSeq=${board.bSeq }"><h4 style="margin: 0;">전시회1</h4></a></span>
 								</div>
-								<!-- 별점 수만큼 색칠하여 출력 -->
-								<div class="star col-5 col-md-2" data-rating="${board.bGrade}">
-									<c:forEach var="i" begin="1" end="5">
-										<span data-value="${i}"> <c:choose>
-												<c:when test="${i <= board.bGrade}">
-													<i class="fas fa-star" style="color: gold;"></i>
-												</c:when>
-												<c:otherwise>
-													<i class="far fa-star"></i>
-												</c:otherwise>
-											</c:choose>
-										</span>
-									</c:forEach>
+							</div>
+							<div class="placeBox col-12">
+								<div class="place">
+									<span>전시장소</span>
+								</div>
+							</div>
+							<div class="dateBox col-12">
+								<div class="row g-0">
+									<div class="date col-7 col-md-10">
+										<span>전시날짜</span>
+									</div>
+									<!-- 별점 수만큼 색칠하여 출력 -->
+									<div class="star col-5 col-md-2" data-rating="${board.bGrade}">
+										<c:forEach var="i" begin="1" end="5">
+											<span data-value="${i}"> <c:choose>
+													<c:when test="${i <= board.bGrade}">
+														<i class="fas fa-star" style="color: gold;"></i>
+													</c:when>
+													<c:otherwise>
+														<i class="far fa-star"></i>
+													</c:otherwise>
+												</c:choose>
+											</span>
+										</c:forEach>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</c:forEach>
+			</c:forEach>
 	</div>
 	<%@ include file="../commons/footer.jsp"%>
 	<script>
@@ -228,6 +229,8 @@ canvas {
 	}
 	
 	$(document).ready(function () {
+		console.log("${fn:length(boardCount)}");
+		console.log("${boardCount}");
 		
 		for (var i = 0; i < $(".contentBox").length; i++) {
 			var eSeq = $(".contentBox").eq(i).attr("id");

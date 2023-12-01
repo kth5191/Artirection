@@ -32,6 +32,11 @@ public class FavoriteDAO {
 		return db.selectOne("Favorite.selectCategoryById", id);
 	}
 	
+	// 나의 모든 찜 목록 가져오기
+	public List<FavoriteDTO> selectAllById(String id) {
+		return db.selectList("Favorite.selectAllById", id);
+	}
+	
 	// 찜의 분류와 숫자 가져오기
 	public List<CategoryCountDTO> getCategoryById(String id) {
 		return db.selectList("Favorite.getCategoryById", id);
