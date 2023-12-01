@@ -15,6 +15,7 @@
     max-width: 1400px !important;
     min-width: 300px;
     margin: auto;
+    padding-bottom: 25px;
 }
 
 .contentBox{
@@ -27,6 +28,9 @@
 
 .favoriteBox{
     font-weight:bold;
+    margin-top: 50px;
+    font-size: 35px;
+    margin-bottom: 60px;
 }
 
 .contentBox .imgBox{
@@ -73,7 +77,7 @@
 	width: 100%;
 
 	margin-top: 15px;
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 
 	font-size: 15px;
 
@@ -86,6 +90,28 @@
 	-webkit-box-orient: vertical;
 
 }
+
+/* 전시회 이미지 */
+.exhibition__img{
+    width: 150px; height: 180px;
+    margin-right: 10px;
+}
+
+/* 아이콘 */
+.exhibition__icon{
+    display: flex;
+    position: relative;
+}
+.icon1 {
+    position: absolute;
+	right: 0px;
+}
+
+.icon2 {
+    position: absolute;
+	right: 30px;
+}
+
 
 .exhibition__location {
 	position: relative;

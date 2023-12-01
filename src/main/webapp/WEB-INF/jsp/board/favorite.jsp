@@ -96,13 +96,13 @@ $(document).ready(function () {
 		      let exhibition__icon = $("<div class='exhibition__icon'>");
               let iconWrite = $("<div class='icon2'>");
               let iconWriteATag = $("<a>").attr("href", '/board/write?eSeq=' + tmSeq+"&category="+realmName);
-              let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
+              let icontWriteIcon = $("<i class='bi bi-pencil-fill fa-lg'></i>");
               iconWriteATag.append(icontWriteIcon);
               iconWrite.append(iconWriteATag);
 
               let iconHeart = $("<div>");
               iconHeart.attr("id", tmSeq);
-              let iconHeartIcon = $("<i class='icon1 bi bi-heart'></i>");
+              let iconHeartIcon = $("<i class='icon1 bi bi-heart fa-lg'></i>");
               iconHeart.append(iconHeartIcon);
 
           exhibition__icon.append(iconWrite).append(iconHeart);

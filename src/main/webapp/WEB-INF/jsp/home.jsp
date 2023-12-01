@@ -77,6 +77,11 @@
 	 map.setZoomable(false); 
 	
 	
+	// 마커 배열
+	var markers = [];
+	
+	
+	
 	$.ajax({
 		url:"/api/selectAll",
 		type:"GET",
@@ -113,6 +118,7 @@
 		        position: position,
 		        map: map
 		    });
+		    markers.push(marker);
 		
 		    // 커스텀 오버레이에 표시할 내용
 		    var overlayContent = '<div class="customOverlayContent" style="padding:5px;">' +
@@ -138,6 +144,8 @@
 		
 		    // 생성된 CustomOverlay를 배열에 담아줍니다.
 		    marker.customOverlayIdx = customOverlays.length - 1;
+		    
+		    
 		});
 		
 		// 지도 클릭 시 모든 CustomOverlay를 닫아줍니다.
