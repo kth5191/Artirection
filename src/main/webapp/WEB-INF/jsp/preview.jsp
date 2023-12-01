@@ -61,6 +61,12 @@
 				</li>
 			</ul>
 		</nav>
+		
+		<div hidden>
+			<c:forEach var="f" items="${fList}">
+				<div class="favoriteSeq">${f.eSeq }</div>
+			</c:forEach>
+		</div>
 
 		<div class="exhibition__content">
 			<!-- 전시 내용 -->
@@ -160,7 +166,7 @@ $(document).on("click","#search",function(){
 				if(totalCount == 0){
 					let exhibition__content = $(".exhibition__content");
 					let search_div = $("<div class='search-div contents border'>");
-						search_div.html("검색 결과가 없습니다.");
+					search_div.html("검색 결과가 없습니다.");
 					exhibition__content.append(search_div);
 				}
 				
@@ -183,78 +189,87 @@ $(document).on("click","#search",function(){
 	 				console.log(one);
 					mapData.push(one);
 					
-					
-//			 		jquery
-					
 					let exhibition__content = $(".exhibition__content");
 
 					let search_div = $("<div class='search-div contents border'>");
 
 			        let img_div = $("<div class='search__img'>");
-			            let img = $("<img class='exhibition__img'> ");
-			                img.attr("src",tmImg);
-			            img_div.append(img);
-			            
-			            
-			            
-			            let exhibition__inner = $("<div class='exhibition__inner'>");
+			        let img = $("<img class='exhibition__img'> ");
+			        img.attr("src",tmImg);
+			        img_div.append(img);
+			        
+			        let exhibition__inner = $("<div class='exhibition__inner'>");
+			        // 디테일 페이지로 이동
+			        let exhibition__title = $("<a href=/board/detail?seq="+tmSeq+"><div class='exhibition__title'>");
+			        exhibition__title.html(tmTitle);
+			        
+	                let exhibition__contents = $("<div class='exhibition__contents'>");
+                    exhibition__contents.html(tmStartDate+" ~ "+tmEndDate);
+                
+                	let exhibition__location = $("<div class='exhibition__location'>");
+                    let exhibition__area = $("<div class='exhibition__area'>");
+                    exhibition__area.html(realmName);
+                    let exhibition__place = $("<div class='exhibition__place'>");
+                    exhibition__place.html(tmPlace);
+                    let exhibition__seq = $("<div style='display:none'>");
+                    exhibition__seq.html(tmSeq);
+                    
+                    exhibition__location.append(exhibition__area).append(exhibition__place).append(exhibition__seq);
 
-			            	// 디테일 페이지로 이동
-			                let exhibition__title = $("<a href=/board/detail?seq="+tmSeq+"><div class='exhibition__title'>");
-			                    exhibition__title.html(tmTitle);
+	                let exhibition__icon = $("<div class='exhibition__icon'>");
+	                let iconWrite = $("<div class='icon2'>");
+	                let iconWriteATag = $("<a>").attr("href", '/board/write?eSeq=' + tmSeq+"&category="+realmName);
+	                let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
+	                iconWriteATag.append(icontWriteIcon);
+	                iconWrite.append(iconWriteATag);
+	                    
+	                let iconHeart = $("<div>");
+	                iconHeart.attr("id", tmSeq);
+	                
+	                // 내가 찜한 목록 리스트
+	                var fSeq = [];
 
-			                let exhibition__contents = $("<div class='exhibition__contents'>");
-			                    exhibition__contents.html(tmStartDate+" ~ "+tmEndDate);
-			                
-			                let exhibition__location = $("<div class='exhibition__location'>");
-			                    let exhibition__area = $("<div class='exhibition__area'>");
-			                        exhibition__area.html(realmName);
-			                    let exhibition__place = $("<div class='exhibition__place'>");
-			                        exhibition__place.html(tmPlace);
-			                    let exhibition__seq = $("<div style='display:none'>");
-			                    	exhibition__seq.html(tmSeq);
-			                
-			                exhibition__location.append(exhibition__area).append(exhibition__place).append(exhibition__seq);
+	            	var favoriteSeq = document.querySelectorAll('.favoriteSeq');
+	                
+	            	favoriteSeq.forEach(function(element) {
+	            	    fSeq.push(element.textContent.trim()); // 각 요소의 텍스트 값을 배열에 추가합니다.
+	            	});
+	                
+	            	console.log(fSeq);
+	            	let iconHeartIcon = {};
+	            	
+	            	
+	            	for (var i = 0; i < fSeq.length; i++) {
+	            		console.log(fSeq[i]);
+	            		
+	            	    if (fSeq[i] === tmSeq) {
+	            	    	iconHeartIcon = $("<i class='icon1 bi bi-heart-fill'></i>");
+	            	    } else {
+	            	    	iconHeartIcon = $("<i class='icon1 bi bi-heart'></i>");
+	            	    }
+	            	}
+	            	
+	            	
+	                
+	                iconHeart.append(iconHeartIcon);
 
-			                let exhibition__icon = $("<div class='exhibition__icon'>");
-			                    let iconWrite = $("<div class='icon2'>");
-			                    let iconWriteATag = $("<a>").attr("href", '/board/write?eSeq=' + tmSeq+"&category="+realmName);
-			                            let icontWriteIcon = $("<i class='bi bi-pencil-fill'></i>");
-			                        iconWriteATag.append(icontWriteIcon);
-			                    iconWrite.append(iconWriteATag);
-			                    
-
-			                    let iconHeart = $("<div>");
-			                    iconHeart.attr("id", tmSeq);
-			                    let iconHeartIcon = $("<i class='icon1 bi bi-heart'></i>");
-			                    iconHeart.append(iconHeartIcon);
-
-			                exhibition__icon.append(iconWrite).append(iconHeart);
-
-
-
-			            exhibition__inner.append(exhibition__title).append(exhibition__contents).append(exhibition__location).append(exhibition__icon);
+	                exhibition__icon.append(iconWrite).append(iconHeart);
+	                
+	                exhibition__inner.append(exhibition__title).append(exhibition__contents).append(exhibition__location).append(exhibition__icon);
 
 			        search_div.append(img_div).append(exhibition__inner);
 					
 			        exhibition__content.append(search_div);
 					
-					
-					
 				})
-				
-				
-				
+
 			}
-			
-			// console.log(mapData);
-	
-	
+
 			// 인포윈도우 배열
 			var infowindows = [];
 			
-// 			// 마커들을 담을 LatLngBounds 객체 생성
-//             var bounds = new kakao.maps.LatLngBounds();
+ 			// 마커들을 담을 LatLngBounds 객체 생성
+            // var bounds = new kakao.maps.LatLngBounds();
          	
 			
 			// 이전에 생성한 마커들을 제거
