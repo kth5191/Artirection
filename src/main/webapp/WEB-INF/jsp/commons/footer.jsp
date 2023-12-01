@@ -41,16 +41,17 @@
 				<div class="developers conDiv">
 					<div class="footer_title colorWhite">Developers</div>
 					<div class="footer_con">
-						<div class="con colorWhite">NAJANG</div>
-						<div class="con colorWhite">NICKNAME2</div>
-						<div class="con colorWhite">NICKNAME#</div>
+						<div class="con colorWhite">Kim Dong-Hoon</div>
+						<div class="con colorWhite">Jang Yu-na</div>
+						<div class="con colorWhite">Hwang Min-Kyeong</div>
 					</div>
 				</div>
 				<div class="contact conDiv">
 					<div class="footer_title colorWhite">CONTACTS</div>
 					<div class="footer_con">
-						<div class="con colorWhite">example@example.com</div>
-						<div class="con colorWhite">example.github.com</div>
+						<div class="con colorWhite">kth5541915@gmail.com</div>
+						<div class="con colorWhite">anuygnaj@gmail.com</div>
+						<div class="con colorWhite">cypher_1013@naver.com</div>
 					</div>
 				</div>
 			</div>

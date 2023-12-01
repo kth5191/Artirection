@@ -241,13 +241,20 @@
 							
 			$(".DetailContainer").append(ImageBox).append(detailBox);	
 			
-			
+			// a 태그에 click 이벤트를 추가 href 속성이 비어있을 때 alert
+			barogagiATag.on("click", function() {
+			    if (tmUrl=="") {
+			        alert("공식 홈페이지가 존재하지 않습니다.");
+			        return false; // 이벤트의 기본 동작을 중단
+			    }
+			});
+
 			
 			// 카카오맵 api
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = { 
 			    center: new kakao.maps.LatLng(tmY, tmX), // 지도의 중심좌표
-			    level: 8 // 지도의 확대 레벨
+			    level: 4 // 지도의 확대 레벨
 			};
 			
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -281,7 +288,7 @@
 			  marker.setMap(map);
 
 			  // 인포윈도우 내용
-			  var infowindowContent = '<div class="markThumbnail" style="text-algin:center; width:200px; height:200px; padding:5px;"> <div><img class="markThumbnail" src='+tmImgUrl+'></div><div>'+tmTitle+'</div></div>';
+			  var infowindowContent = '<div class="markThumbnail" style="text-algin:center; width:100px; height:50px; padding:5px;"> <div>'+tmPlace+'</div></div>';
 
 			  // 인포윈도우 생성
 			  var infowindow = new kakao.maps.InfoWindow({
@@ -304,6 +311,8 @@
 			
 			
 		})
+		
+		
 		
 		
 

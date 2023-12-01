@@ -36,7 +36,14 @@
             </div>
         </div>
 
-        <div id="recommendTitle" class="colorBlack">이런 전시를 좋아하실 것 같아요!</div>
+		<c:choose>
+			<c:when test="${loginID eq null }">
+				<div id="recommendTitle" class="colorBlack">이런 전시를 좋아하실 것 같아요!</div>
+			</c:when>
+			<c:otherwise>
+				<div id="recommendTitle" class="colorBlack">${loginID } 님이 좋아하실 것 같아요!</div>
+			</c:otherwise>
+		</c:choose>
         <div class="recommendBox row">
         </div>
     </div>
@@ -68,6 +75,11 @@
 	
 	// 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
 	 map.setZoomable(false); 
+	
+	
+	// 마커 배열
+	var markers = [];
+	
 	
 	
 	$.ajax({
@@ -106,6 +118,7 @@
 		        position: position,
 		        map: map
 		    });
+		    markers.push(marker);
 		
 		    // 커스텀 오버레이에 표시할 내용
 		    var overlayContent = '<div class="customOverlayContent" style="padding:5px;">' +
@@ -131,6 +144,8 @@
 		
 		    // 생성된 CustomOverlay를 배열에 담아줍니다.
 		    marker.customOverlayIdx = customOverlays.length - 1;
+		    
+		    
 		});
 		
 		// 지도 클릭 시 모든 CustomOverlay를 닫아줍니다.

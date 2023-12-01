@@ -50,8 +50,6 @@ public class HomeController {
 	public String recommendList(Model model) throws Exception {
 		String loginID = (String) session.getAttribute("loginID");
 		
-		System.out.println("controller 들어옴");
-		
 		String category = "";
 		// 회원이라면 찜 목록에서 분류 가져오기
 		if(loginID != null) {
@@ -65,13 +63,11 @@ public class HomeController {
 			category = "연극";
 		}
 		
-		System.out.println("카테고리 : " + category);
-		
 		// 카테고리로 전시 검색
 		StringBuilder urlBuilder = new StringBuilder("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/realm"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=WTN3HpCtoUbvSxoTg3w7og3Y2piCph2NEpXjiv9QSHsVyTp1ezvYXUPvm4ntMkEIiub%2FLGlzFzf7NpLn2I5cow%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8") + "=" + URLEncoder.encode(category, "UTF-8")); /*분류*/
-        urlBuilder.append("&" + URLEncoder.encode("rows","UTF-8") + "=" + URLEncoder.encode("4", "UTF-8")); /**/
+        urlBuilder.append("&" + URLEncoder.encode("rows","UTF-8") + "=" + URLEncoder.encode("40", "UTF-8")); /**/
         
         URL url = new URL(urlBuilder.toString());
         
