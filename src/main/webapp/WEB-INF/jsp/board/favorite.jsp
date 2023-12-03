@@ -20,6 +20,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 <link rel="stylesheet" href="/css/board/favorite.css">
+<style>
+i{
+	cursor : pointer;
+}
+</style>
 
 <title>찜한 목록</title>
 </head>
@@ -30,6 +35,7 @@
 		<div class="favoriteBox">
 			<h3 class="favoriteBox col-12">찜한 목록</h3>
 		</div>
+		<div class='exhibition__title' align="right"><button id="submit_button">수정하기</button></div>
 
 		<div class="exhibition__content">
 		</div>
@@ -102,7 +108,7 @@ $(document).ready(function () {
 
               let iconHeart = $("<div>");
               iconHeart.attr("id", tmSeq);
-              let iconHeartIcon = $("<i class='icon1 bi bi-heart fa-lg'></i>");
+              let iconHeartIcon = $("<i class='icon1 bi bi-heart-fill fa-lg'></i>");
               iconHeart.append(iconHeartIcon);
 
           exhibition__icon.append(iconWrite).append(iconHeart);
@@ -117,5 +123,40 @@ $(document).ready(function () {
 
 	  });
 	});
+	
+$(document).on("click", ".icon1", function() {
+	$(this).toggleClass("bi-heart bi-heart-fill");
+	
+	let parentSeq = $(this).parent().attr("id");
+	let category = $(this).parents(".exhibition__icon").siblings(".exhibition__location").children(".exhibition__area").html();
+	console.log(category);
+	
+	if($(this).attr("class") == 'icon1 bi bi-heart-fill') {
+		$.ajax({
+			url:"/favorite/insert",
+			type:"POST",
+			dataType:"text",
+			data:{
+				seq : parentSeq,
+				category : category
+			}
+			
+		}).done(function(resp){})
+	} else {
+		$.ajax({
+			url:"/favorite/delete",
+			type:"POST",
+			dataType:"text",
+			data:{
+				seq : parentSeq
+			}
+			
+		}).done(function(resp){})
+	}
+});
+
+$("#submit_button").on("click", function() {
+	location.reload();
+});
 </script>
 </html>
