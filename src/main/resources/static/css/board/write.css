@@ -94,3 +94,11 @@ form {
 		font-size: 15px
 	}
 }
+
+.stars {
+	font-size: 24px;
+}
+
+.fa-star {
+	color: gold; /* 노란색 별로 변경 */
+}

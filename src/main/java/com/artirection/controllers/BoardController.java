@@ -41,6 +41,18 @@ public class BoardController {
 		
 		return "redirect:/";
 	}
+	
+	// 글 수정하기
+	@RequestMapping("updateProc")
+	public String updateProc(BoardDTO dto) throws Exception {
+		String writer = (String) session.getAttribute("loginID");
+		dto.setbID(writer);
+		
+		service.updateByBSeq(dto);
+		
+		return "redirect:/member/myRecord";
+	}
+	
 	// 찜한목록 이동
 	@RequestMapping("favorite")
 	public String favorite(Model model) {

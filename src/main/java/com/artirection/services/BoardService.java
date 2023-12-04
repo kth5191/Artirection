@@ -18,6 +18,10 @@ public class BoardService {
 		return bdao.insert(dto);
 	}
 	
+	public int updateByBSeq(BoardDTO dto) {
+		return bdao.updateByBSeq(dto);
+	}
+	
 	// 로그인정보로 작성 리뷰 검색(마이페이지용)
 	public List<BoardDTO> selectById(String id) {
 		return bdao.selectById(id);
