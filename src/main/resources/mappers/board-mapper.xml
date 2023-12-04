@@ -7,6 +7,10 @@
 		INSERT INTO board VALUES (null, #{eSeq}, #{category}, #{bID}, #{bTitle}, #{bContents}, #{bGrade}, now())
 	</insert>
 	
+	<update id="updateByBSeq">
+		UPDATE board SET bTitle=#{bTitle}, bContents=#{bContents}, bGrade=#{bGrade} WHERE bSeq = #{bSeq}
+	</update>
+	
 	<select id="selectById" resultType="com.artirection.dto.BoardDTO">
 		SELECT * FROM board WHERE bID = #{id}
 	</select>

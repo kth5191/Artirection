@@ -20,15 +20,6 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <link rel="stylesheet" href="/css/board/write.css">
 <title>Document</title>
-<style>
-.stars {
-	font-size: 24px;
-}
-
-.fas {
-	color: gold; /* 노란색 별로 변경 */
-}
-</style>
 </head>
 
 <body>

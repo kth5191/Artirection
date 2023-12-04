@@ -18,6 +18,10 @@ public class BoardDAO {
 		return db.insert("Board.insert", dto);
 	}
 	
+	public int updateByBSeq(BoardDTO dto) {
+		return db.update("Board.updateByBSeq", dto);
+	}
+	
 	public List<BoardDTO> selectById(String id) {
 		return db.selectList("Board.selectById", id);
 	}
