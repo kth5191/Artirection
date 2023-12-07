@@ -42,9 +42,6 @@
 					<span class="star" data-value="4"><i class="far fa-star"></i></span> 
 					<span class="star" data-value="5"><i class="far fa-star"></i></span>
 				</div>
-				<div class="fileBox">
-					<input type="file" name="files" multiple>
-				</div>
 
 				<div class="writeBox">
 					<a href="/member/myRecord"> <input class="writebtn" type="button" value="목록으로"></a> 
